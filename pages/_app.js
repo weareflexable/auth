@@ -51,16 +51,18 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Navbar isAuthenticated={isAuthenticated} />
-      <Component {...pageProps} />
-      <ToastContainer
-        position="bottom-center"
-        autoClose={5000}
-        hideProgressBar={false}
-        closeOnClick={true}
-        pauseOnHover={true}
-        draggable={true}
-        dark
-      />
+      <div className="min-h-92vh">
+        <Component {...pageProps} />
+        <ToastContainer
+          position="bottom-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          closeOnClick={true}
+          pauseOnHover={true}
+          draggable={true}
+          dark
+        />
+      </div>
     </>
   );
 }
