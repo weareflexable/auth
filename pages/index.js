@@ -4,25 +4,25 @@ import Link from "next/Link";
 const Home = () => {
   return (
     <>
-      <div class="bg-white">
-        <section class="bg-[#FCF8F1] bg-opacity-30 py-10 sm:py-16 lg:py-24">
+      <div class=" bg-primary">
+        <section class=" bg-primary py-10 sm:py-16 lg:py-24">
           <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="grid items-center grid-cols-1 gap-12 lg:grid-cols-2">
               <div className="flex flex-col items-center lg:items-start">
-                <p class="text-base font-semibold tracking-wider text-blue-600 uppercase">
+                <p class="text-base font-semibold tracking-wider text-secondary uppercase">
                   event experience like never before
                 </p>
-                <h1 class="mt-4 text-4xl font-bold text-black lg:mt-8 sm:text-6xl xl:text-8xl">
+                <h1 class="mt-4 text-4xl font-bold text-white lg:mt-8 sm:text-6xl xl:text-8xl">
                   Flex your way in
                 </h1>
-                <p class="mt-4 text-base text-black lg:mt-8 sm:text-xl capitalize">
+                <p class="mt-4 text-base text-white lg:mt-8 sm:text-xl capitalize">
                   Stay ahead of the queue
                 </p>
                 <Link href="/register">
                   <a
                     href="#"
                     title=""
-                    class="inline-flex items-center px-6 py-4 mt-8 font-semibold text-black transition-all duration-200 bg-yellow-300 rounded-full lg:mt-16 hover:bg-yellow-400 focus:bg-yellow-400"
+                    class="inline-flex items-center px-6 py-4 mt-8 font-semibold text-black transition-all duration-200 bg-secondary rounded-full lg:mt-16 hover:bg-yellow-400 focus:bg-yellow-400"
                     role="button"
                   >
                     Join for free
@@ -43,13 +43,13 @@ const Home = () => {
                   </a>
                 </Link>
 
-                <p class="mt-5 text-gray-600">
+                <p class="mt-5 text-gray-300">
                   Already joined us?{" "}
                   <Link href="/login">
                     <a
                       href="#"
                       title=""
-                      class="text-black transition-all duration-200 hover:underline"
+                      class="text-secondary transition-all duration-200 hover:underline"
                     >
                       Log in
                     </a>
