@@ -169,7 +169,10 @@ const New = () => {
             >
               <div className="space-y-5">
                 <div>
-                  <label for="" className="text-base font-medium text-gray-400">
+                  <label
+                    htmlFor=""
+                    className="text-base font-medium text-gray-400"
+                  >
                     {" "}
                     Email{" "}
                   </label>
@@ -204,7 +207,10 @@ const New = () => {
                 </div>
 
                 <div>
-                  <label for="" className="text-base font-medium text-gray-400">
+                  <label
+                    htmlFor=""
+                    className="text-base font-medium text-gray-400"
+                  >
                     {" "}
                     Password{" "}
                   </label>
@@ -239,7 +245,10 @@ const New = () => {
                 </div>
 
                 <div>
-                  <label for="" className="text-base font-medium text-gray-400">
+                  <label
+                    htmlFor=""
+                    className="text-base font-medium text-gray-400"
+                  >
                     {" "}
                     Confirm Password{" "}
                   </label>
