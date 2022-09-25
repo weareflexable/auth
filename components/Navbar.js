@@ -9,7 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 export default function Navbar({ isAuthenticated }) {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
   const router = useRouter();
-
+  console.log("waa", isAuthenticated);
   // todo: functions
 
   // sign out

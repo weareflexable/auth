@@ -7,16 +7,28 @@ import supabase from "../utils/supabaseClient";
 import { useRouter } from "next/router";
 import { checkUser } from "../utils/auth";
 import axios from "axios";
+import { getPlatformPaseto, setPlatformPaseto } from "../src/storage";
+import { getPaseto } from "../src/api/platform";
 
 function MyApp({ Component, pageProps }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const router = useRouter();
-
   useEffect(() => {
+    if (isAuthenticated && !getPlatformPaseto()) {
+      getPaseto(supabase.auth.session().access_token).then(setPlatformPaseto);
+    }
+  }, [isAuthenticated]);
+  useEffect(() => {
+    console.log("hemlo");
+    // checks if user already signed in when they land
+    const user = checkUser();
+    if (user) {
+      setIsAuthenticated(true);
+    }
+
     const { data: authListener } = supabase.auth.onAuthStateChange(
       (event, session) => {
         updateSupabaseCookie(event, session);
-
         if (event === "SIGNED_IN") {
           setIsAuthenticated(true);
         }
@@ -25,12 +37,6 @@ function MyApp({ Component, pageProps }) {
         }
       }
     );
-
-    // checks if user already signed in when they land
-    const user = checkUser();
-    if (user) {
-      setIsAuthenticated(true);
-    }
 
     return () => {
       authListener?.unsubscribe();

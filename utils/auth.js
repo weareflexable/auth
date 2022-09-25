@@ -1,3 +1,4 @@
+import { removePlatformPaseto, setPlatformPaseto } from "../src/storage";
 import supabase from "./supabaseClient";
 
 // todo: signIn
@@ -11,6 +12,7 @@ export const signIn = async ({ email, password }) => {
 
 // todo: sign out
 export const signOut = async () => {
+  removePlatformPaseto();
   const { error } = await supabase.auth.signOut();
   return { error };
 };
