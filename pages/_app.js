@@ -45,20 +45,13 @@ function MyApp({ Component, pageProps }) {
   }, []);
 
   async function updateSupabaseCookie(event, session) {
-    // await fetch("/api/auth", {
-    //   method: "POST",
-    //   headers: new Headers({ "Content-Type": "application/json" }),
-    //   credentials: "same-origin",
-    //   body: JSON.stringify({ event, session }),
-    // });
-
     await axios.post("/api/auth", { event, session });
   }
 
   return (
     <>
       <Navbar isAuthenticated={isAuthenticated} />
-      <div className="min-h-92vh">
+      <div className="h-[92vh]">
         <Component {...pageProps} />
         <ToastContainer
           position="bottom-center"

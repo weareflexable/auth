@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import { toast } from "react-toastify";
 import { signUp } from "../utils/auth";
-const New = () => {
+const Register = () => {
   // todo: states
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -41,25 +41,16 @@ const New = () => {
   return (
     <section className="bg-white">
       <div className="grid grid-cols-1 lg:grid-cols-2 ">
-        <div className="relative flex items-end px-4 pb-10 pt-60 sm:pb-16 md:justify-center lg:pb-24 bg-primary sm:px-6 lg:px-8">
-          <div className="absolute inset-0">
-            {/* <img className="object-cover w-full h-full" src="signup.jpg" alt="" /> */}
-            {/* <img
-              className="object-cover w-full h-full"
-              src="https://cdn.rareblocks.xyz/collection/celebration/images/signup/4/girl-working-on-laptop.jpg"
-              alt=""
-            /> */}
-          </div>
-          {/* <div className="absolute inset-0 bg-gradient-to-t from-primary to-secondary"></div> */}
-
+        <div className="relative flex items-end px-4 pb-10  sm:pb-16 md:justify-center lg:pb-24 bg-primary sm:px-6 lg:px-8">
           <div className="relative">
-            <div className="w-full max-w-xl xl:w-full xl:mx-auto xl:pr-24 xl:max-w-xl">
-              <h3 className="text-4xl font-bold text-white">
-                <span className="text-secondary">Sign up</span> &{" "}
+            <div className="w-full max-w-xl xl:w-full xl:mx-auto mr-auto xl:max-w-xl">
+              <h3 className="text-4xl font-bold text-white text-center lg:text-left max-w-[20rem] lg:mx-0 mx-auto leading-[150%]">
+                <span className="text-secondary">Sign up</span>{" "}
+                <span className="block lg:inline">& </span>
                 <br className="hidden xl:block" />
                 <span className="text-secondary">Forget Queues</span>
               </h3>
-              <ul className="grid grid-cols-2 mt-10 sm:grid-cols-2 gap-x-8 gap-y-4">
+              <ul className="flex flex-wrap justify-center lg:justify-start lg:grid lg:grid-cols-2 lg:gap-x-10 gap-5 mt-5">
                 <li className="flex items-center space-x-3">
                   <div className="inline-flex items-center justify-center flex-shrink-0 w-5 h-5 bg-blue-500 rounded-full">
                     <svg
@@ -141,6 +132,88 @@ const New = () => {
                   </span>
                 </li>
               </ul>
+              {/* <ul className="grid grid-cols-2 mt-10 sm:grid-cols-2 gap-x-8 gap-y-4 ">
+                <li className="flex items-center space-x-3">
+                  <div className="inline-flex items-center justify-center flex-shrink-0 w-5 h-5 bg-blue-500 rounded-full">
+                    <svg
+                      className="w-3.5 h-3.5 text-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clip-rule="evenodd"
+                      ></path>
+                    </svg>
+                  </div>
+                  <span className="text-lg font-medium text-white">
+                    {" "}
+                    Superfast Processing{" "}
+                  </span>
+                </li>
+                <li className="flex items-center space-x-3">
+                  <div className="inline-flex items-center justify-center flex-shrink-0 w-5 h-5 bg-blue-500 rounded-full">
+                    <svg
+                      className="w-3.5 h-3.5 text-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clip-rule="evenodd"
+                      ></path>
+                    </svg>
+                  </div>
+                  <span className="text-lg font-medium text-white">
+                    {" "}
+                    Several Services{" "}
+                  </span>
+                </li>
+                <li className="flex items-center space-x-3">
+                  <div className="inline-flex items-center justify-center flex-shrink-0 w-5 h-5 bg-blue-500 rounded-full">
+                    <svg
+                      className="w-3.5 h-3.5 text-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clip-rule="evenodd"
+                      ></path>
+                    </svg>
+                  </div>
+                  <span className="text-lg font-medium text-white">
+                    {" "}
+                    All In One Solution{" "}
+                  </span>
+                </li>
+                <li className="flex items-center space-x-3">
+                  <div className="inline-flex items-center justify-center flex-shrink-0 w-5 h-5 bg-blue-500 rounded-full">
+                    <svg
+                      className="w-3.5 h-3.5 text-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clip-rule="evenodd"
+                      ></path>
+                    </svg>
+                  </div>
+                  <span className="text-lg font-medium text-white">
+                    {" "}
+                    Flex It{" "}
+                  </span>
+                </li>
+              </ul> */}
             </div>
           </div>
         </div>
@@ -357,4 +430,4 @@ const New = () => {
   );
 };
 
-export default New;
+export default Register;
