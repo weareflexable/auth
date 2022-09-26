@@ -9,7 +9,8 @@ module.exports = {
       colors: {
         primary: "#010B14",
         white: "#f7f7f7",
-        secondary: "#FF9F1C",
+        secondary: "#17ffa6",
+        accent: "#8cb9b4",
       },
       fontFamily: {
         heading: ["Cairo", "sans-serif"],

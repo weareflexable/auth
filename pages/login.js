@@ -45,9 +45,9 @@ const New = () => {
   };
 
   return (
-    <section className="h-full bg-primary">
+    <section className="h-full bg-gradient-to-r from-black to-primary">
       <div className="grid grid-cols-1 lg:grid-cols-2">
-        <div className="relative flex items-end px-4pb-10  sm:pb-16 md:justify-center lg:pb-24 bg-primary sm:px-6 lg:px-8">
+        <div className="relative flex items-end px-4pb-10  sm:pb-16 md:justify-center lg:pb-24 sm:px-6 lg:px-8">
           <div className="relative">
             <div className="w-full max-w-xl xl:w-full xl:mx-auto mr-auto xl:max-w-xl">
               <h3 className="text-4xl font-bold text-white text-center lg:text-left max-w-[20rem] lg:mx-0 mx-auto leading-[150%]">
@@ -142,7 +142,7 @@ const New = () => {
           </div>
         </div>
 
-        <div className="flex items-center justify-center px-4 py-10 bg-primary sm:px-6 lg:px-8 sm:py-16 lg:py-24">
+        <div className="flex items-center justify-center px-4 py-10 sm:px-6 lg:px-8 sm:py-16 lg:py-24">
           <div className="xl:w-full xl:max-w-sm 2xl:max-w-md xl:mx-auto">
             <h2 className="text-3xl font-bold leading-tight text-white sm:text-4xl">
               Log in to Dashboard

@@ -1,134 +1,43 @@
 import React from "react";
 import Link from "next/link";
+import { FaHandshake } from "react-icons/fa";
 
 const Home = () => {
   return (
-    <>
-      <div class=" bg-primary">
-        <section className=" py-10 sm:py-16 lg:py-24">
-          <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-            <div class="grid items-center grid-cols-1 gap-12 lg:grid-cols-2">
-              <div className="flex flex-col items-center lg:items-start">
-                <p class="text-base font-semibold tracking-wider text-secondary uppercase">
-                  event experience like never before
-                </p>
-                <h1 class="mt-4 text-4xl font-bold text-white lg:mt-8 sm:text-6xl xl:text-8xl">
-                  Flex your way in
-                </h1>
-                <p class="mt-4 text-base text-white lg:mt-8 sm:text-xl capitalize">
-                  Stay ahead of the queue
-                </p>
-                <Link href="/register">
-                  <a
-                    href="#"
-                    title=""
-                    class="inline-flex items-center px-6 py-2 mt-8 font-semibold text-black transition-all duration-200 bg-secondary rounded-full lg:mt-16 hover:bg-yellow-400 focus:bg-yellow-400"
-                    role="button"
-                  >
-                    Join for free
-                    <svg
-                      class="w-6 h-6 ml-8 -mr-2"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="1.5"
-                        d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-                  </a>
-                </Link>
+    <main className="h-full bg-gradient-to-b from-black via-black to-primary flex flex-col">
+      <div className=" flex items-center pt-16 md:pt-32 px-6 flex-col">
+        <h1 className="text-[#8cb9b4] text-4xl text-center leading-[130%] w-5/6 md:text-5xl ">
+          You will never be in a queue again.
+        </h1>
+        <p className="text-gray-400 w-4/6 md:w-3/6 text-center leading-[150%] mt-5 mb-8">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum quas,
+          nesciunt odio optio obcaecati consectetur dolor earum cum dicta harum.
+        </p>
+        <Link href="/register">
+          <a className=" px-4 py-1 bg-secondary text-primary rounded-md font-bold flex items-center justify-center gap-3">
+            <FaHandshake /> Join Now
+          </a>
+        </Link>
+        <p className="text-gray-500 my-4 text-xs">or</p>
+        <Link href="/login">
+          <a className="text-secondary opacity-75 font-light text-sm">
+            Sign in
+          </a>
+        </Link>
 
-                <p class="mt-5 text-gray-300">
-                  Already joined us?{" "}
-                  <Link href="/login">
-                    <a
-                      href="#"
-                      title=""
-                      class="text-secondary transition-all duration-200 hover:underline"
-                    >
-                      Log in
-                    </a>
-                  </Link>
-                </p>
-              </div>
-
-              <div>
-                <img
-                  className="w-full h-full object-contain"
-                  src="https://cdn.rareblocks.xyz/collection/celebration/images/hero/1/hero-img.png"
-                  alt=""
-                />
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* <p className="text-gray-500 text-xs mt-3 flex items-center justify-center gap-3">
+          Already joined?{" "}
+          <Link href="/login">
+            <a className="text-secondary text-base">Sign in</a>
+          </Link>
+        </p> */}
       </div>
-      {/* <main className="bg-primary h-full px-5 lg:px-48 py-10">
-        <div className="flex flex-col lg:flex-row h-full lg:justify-between gap-12">
-          <div className="flex flex-col items-center lg:items-start mb-16  lg:justify-center lg:max-w-[500px] lg:flex-[.6]">
-            <p class="text-base font-semibold tracking-wider text-secondary uppercase">
-              event experience like never before
-            </p>
-            <h1 class="mt-4 text-4xl font-bold text-white lg:mt-8 sm:text-6xl xl:text-8xl">
-              Flex your way in
-            </h1>
-            <p class="mt-4 text-base text-white lg:mt-8 sm:text-xl capitalize">
-              Stay ahead of the queue
-            </p>
-            <Link href="/register">
-              <a
-                href="#"
-                title=""
-                class="inline-flex items-center px-6 py-2 mt-8 font-semibold text-black transition-all duration-200 bg-secondary rounded-full lg:mt-16 hover:bg-yellow-400 focus:bg-yellow-400"
-                role="button"
-              >
-                Join for free
-                <svg
-                  class="w-6 h-6 ml-8 -mr-2"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.5"
-                    d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-              </a>
-            </Link>
-
-            <p class="mt-5 text-gray-300">
-              Already joined us?{" "}
-              <Link href="/login">
-                <a
-                  href="#"
-                  title=""
-                  class="text-secondary transition-all duration-200 hover:underline"
-                >
-                  Log in
-                </a>
-              </Link>
-            </p>
-          </div>
-
-          <div className=" lg:flex-[.4]">
-            <img
-              className="w-full h-full object-cover"
-              src="https://cdn.rareblocks.xyz/collection/celebration/images/hero/1/hero-img.png"
-              alt=""
-            />
-          </div>
-        </div>
-      </main> */}
-    </>
+      <div className="flex items-center justify-center px-6 grow">
+        <p className="text-4xl lg:text-6xl md:text-5xl text-center leading-[150%] bg-clip-text font-bold font-heading bg-gradient-to-r from-gray-300 text-transparent via-accent to-secondary">
+          #WeAreFlexable
+        </p>
+      </div>
+    </main>
   );
 };
 

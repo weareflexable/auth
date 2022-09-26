@@ -27,7 +27,7 @@ export default function Navbar({ isAuthenticated }) {
   console.log(isAuthenticated);
   return (
     <>
-      <header className="bg-primary h-[8vh]">
+      <header className="bg-black h-[8vh]">
         <div className="px-4 mx-auto sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 ">
             <div className="flex-shrink-0">
@@ -127,7 +127,7 @@ export default function Navbar({ isAuthenticated }) {
               <Link href="/register">
                 <a
                   title=""
-                  className="hidden lg:inline-flex items-center justify-center px-5 py-1 text-base transition-all duration-200 hover:bg-secondary hover:text-white focus:text-black focus:bg-yellow-300 font-semibold text-primary bg-white rounded-full"
+                  className="hidden lg:inline-flex items-center justify-center px-5 py-1 text-base transition-all duration-200  hover:opacity-[100%] focus:text-black focus:bg-yellow-300  text-secondary opacity-[80%] rounded-full "
                   role="button"
                 >
                   {" "}
