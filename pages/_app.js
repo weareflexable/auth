@@ -31,6 +31,7 @@ function MyApp({ Component, pageProps }) {
         updateSupabaseCookie(event, session);
         if (event === "SIGNED_IN") {
           setIsAuthenticated(true);
+          router.push("/dashboard");
         }
         if (event === "SIGNED_OUT") {
           setIsAuthenticated(false);

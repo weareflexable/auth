@@ -1,4 +1,4 @@
-import Link from "next/Link";
+import Link from "next/link";
 import supabase from "../utils/supabaseClient";
 import { useRouter } from "next/router";
 import { signOut } from "../utils/auth";
@@ -9,7 +9,6 @@ import "react-toastify/dist/ReactToastify.css";
 export default function Navbar({ isAuthenticated }) {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
   const router = useRouter();
-  console.log("waa", isAuthenticated);
   // todo: functions
 
   // sign out

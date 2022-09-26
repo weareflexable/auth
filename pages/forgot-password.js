@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Head from "next/head";
-import Link from "next/Link";
+import Link from "next/link";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import { createRecovery } from "../utils/auth";
