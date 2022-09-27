@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const Home = () => {
   return (
@@ -58,7 +59,7 @@ const Home = () => {
               </div>
 
               <div>
-                <img
+                <Image
                   className="w-full h-full object-contain"
                   src="https://cdn.rareblocks.xyz/collection/celebration/images/hero/1/hero-img.png"
                   alt=""

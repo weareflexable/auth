@@ -42,7 +42,7 @@ function MyApp({ Component, pageProps }) {
     return () => {
       authListener?.unsubscribe();
     };
-  }, []);
+  }, [router]);
 
   async function updateSupabaseCookie(event, session) {
     await axios.post("/api/auth", { event, session });
