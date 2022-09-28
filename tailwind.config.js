@@ -14,6 +14,7 @@ module.exports = {
       },
       fontFamily: {
         heading: ["Cairo", "sans-serif"],
+        normal: ["Inter", "sans-serif"],
       },
       boxShadow: {
         btnShadow: "2px 2px 9px #6B5D5D",

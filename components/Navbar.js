@@ -6,7 +6,7 @@ import React from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export default function Navbar({ isAuthenticated }) {
+export default function Navbar({ isAuthenticated, setIsSidebar }) {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
   const router = useRouter();
   // todo: functions
@@ -20,14 +20,9 @@ export default function Navbar({ isAuthenticated }) {
     }
   };
 
-  const checkSession = async () => {
-    const session = await supabase.auth.session();
-    console.log(session);
-  };
-  console.log(isAuthenticated);
   return (
     <>
-      <header className="bg-black h-[8vh]">
+      <header className="bg-black h-[8vh] z-[50] w-full fixed">
         <div className="px-4 mx-auto sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 ">
             <div className="flex-shrink-0">
@@ -39,8 +34,9 @@ export default function Navbar({ isAuthenticated }) {
             </div>
 
             <button
+              onClick={() => setIsSidebar((prev) => !prev)}
               type="button"
-              className="inline-flex p-2 text-white transition-all duration-200 rounded-md lg:hidden focus:bg-gray-100 hover:bg-gray-100"
+              className="inline-flex p-2 text-white transition-all duration-200 rounded-md lg:hidden  hover:text-secondary"
             >
               {/* <!-- Menu open: "hidden", Menu closed: "block" --> */}
               <svg
@@ -51,9 +47,9 @@ export default function Navbar({ isAuthenticated }) {
                 stroke="currentColor"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="M4 8h16M4 16h16"
                 ></path>
               </svg>
@@ -67,9 +63,9 @@ export default function Navbar({ isAuthenticated }) {
                 stroke="currentColor"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="M6 18L18 6M6 6l12 12"
                 ></path>
               </svg>
@@ -79,38 +75,38 @@ export default function Navbar({ isAuthenticated }) {
               <Link href="/dashboard">
                 <a
                   title=""
-                  className="text-base text-white transition-all duration-200 hover:text-opacity-80"
+                  className="uppercase text-base text-white transition-all duration-200 hover:text-opacity-80"
                 >
                   {" "}
-                  Dashboard{" "}
+                  Home{" "}
                 </a>
               </Link>
 
               <a
                 href="#"
                 title=""
-                className="text-base text-white transition-all duration-200 hover:text-opacity-80"
+                className="uppercase text-base text-white transition-all duration-200 hover:text-opacity-80"
               >
                 {" "}
-                Solutions{" "}
+                Night Life{" "}
               </a>
 
               <a
                 href="#"
                 title=""
-                className="text-base text-white transition-all duration-200 hover:text-opacity-80"
+                className="uppercase text-base text-white transition-all duration-200 hover:text-opacity-80"
               >
                 {" "}
-                Resources{" "}
+                Restaurants{" "}
               </a>
 
               <a
                 href="#"
                 title=""
-                className="text-base text-white transition-all duration-200 hover:text-opacity-80"
+                className="uppercase text-base text-white transition-all duration-200 hover:text-opacity-80"
               >
                 {" "}
-                Pricing{" "}
+                Greek Life{" "}
               </a>
             </div>
 

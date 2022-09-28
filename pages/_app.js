@@ -9,9 +9,11 @@ import { checkUser } from "../utils/auth";
 import axios from "axios";
 import { getPlatformPaseto, setPlatformPaseto } from "../src/storage";
 import { getPaseto } from "../src/api/platform";
+import Sidebar from "../components/Sidebar";
 
 function MyApp({ Component, pageProps }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isSidebar, setIsSidebar] = useState(true);
   const router = useRouter();
   useEffect(() => {
     if (isAuthenticated && !getPlatformPaseto()) {
@@ -19,7 +21,6 @@ function MyApp({ Component, pageProps }) {
     }
   }, [isAuthenticated]);
   useEffect(() => {
-    console.log("hemlo");
     // checks if user already signed in when they land
     const user = checkUser();
     if (user) {
@@ -50,8 +51,9 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
-      <Navbar isAuthenticated={isAuthenticated} />
-      <div className="h-[92vh]">
+      <Navbar isAuthenticated={isAuthenticated} setIsSidebar={setIsSidebar} />
+      {isSidebar && <Sidebar />}
+      <div className="h-[100vh]">
         <Component {...pageProps} />
         <ToastContainer
           position="bottom-center"
