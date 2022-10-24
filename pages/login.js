@@ -27,8 +27,9 @@ const New = () => {
     }
     if (session) {
       setIsSubmitting(false);
+      const paseto = getPlatformPaseto()
       toast.success("Logged in successfully");
-      router.push("/dashboard");
+      router.push(`/https://localhost:3002/bookings/${paseto}`);
     }
   };
   const handleProviderLogin = async (provider) => {
@@ -38,8 +39,9 @@ const New = () => {
       toast.error(error.message);
     }
     if (user) {
+      const paseto = getPlatformPaseto()
       toast.success("Logged in successfully");
-      // router.push("/dashboard");
+      router.push(`/https://localhost:3002/bookings/${paseto}`);
     }
     setIsSubmitting(false);
   };
