@@ -20,10 +20,7 @@ const Services = () => {
             your night out.
           </p>
           <Link href="/">
-            <a
-              href="/"
-              className="px-4 py-2 text-white uppercase border-[1px] border-white text-[10px] mt-6"
-            >
+            <a className="px-4 py-2 text-white uppercase border-[1px] border-white text-[10px] mt-6">
               flex up
             </a>
           </Link>
@@ -41,10 +38,7 @@ const Services = () => {
             goers more utility.
           </p>
           <Link href="/">
-            <a
-              href="/"
-              className="px-4 py-2 text-white uppercase border-[1px] border-white text-[10px] mt-6"
-            >
+            <a className="px-4 py-2 text-white uppercase border-[1px] border-white text-[10px] mt-6">
               flex up
             </a>
           </Link>
@@ -59,13 +53,10 @@ const Services = () => {
           </p>
           <p className="uppercase text-center text-gray-400 font-light text-sm max-w-[220px] leading-[150%] ">
             click to learn more about how we are exporting greek coolness to
-            everyday students who couldn't make the cut.
+            everyday students who couldn&apos;t make the cut.
           </p>
           <Link href="/">
-            <a
-              href="/"
-              className="px-4 py-2 text-white uppercase border-[1px] border-white text-[10px] mt-6"
-            >
+            <a className="px-4 py-2 text-white uppercase border-[1px] border-white text-[10px] mt-6">
               flex up
             </a>
           </Link>

@@ -19,12 +19,12 @@ const Home = () => {
           <div className="flex flex-col md:flex-row gap-5">
             <Link href="/register">
               <a className=" capitalize px-6 py-2 bg-gradient-to-r from-black to-primary text-secondary border-2 border-white rounded-md  flex items-center justify-center gap-3 ">
-                I'm a customer
+                I&apos;m a customer
               </a>
             </Link>
             <Link href="/register">
               <a className=" capitalize px-6 py-2 text-secondary border-2 border-white rounded-md  flex items-center justify-center gap-3">
-                I'm a venue owner
+                I&apos;m a venue owner
               </a>
             </Link>
           </div>
