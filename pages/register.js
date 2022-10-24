@@ -3,6 +3,11 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import { toast } from "react-toastify";
 import { signUp } from "../utils/auth";
+import Link from 'next/link'
+import bar from '/public/bar.jpg'
+// import neonBar from '/neon-bar.jpg' 
+
+
 const Register = () => {
   // todo: states
   const [email, setEmail] = useState("");
@@ -39,7 +44,7 @@ const Register = () => {
   };
 
   return (
-    <section className="bg-white">
+    <section style={{backgroundImage:`url(/bar.jpg)`, width:'100%',height:'100%'}} >
       <div className="grid grid-cols-1 lg:grid-cols-2 ">
         <div className="relative flex items-end px-4 pb-10  sm:pb-16 md:justify-center lg:pb-24 bg-primary sm:px-6 lg:px-8">
           <div className="relative">
@@ -225,13 +230,11 @@ const Register = () => {
             </h2>
             <p className="mt-2 text-base text-gray-400">
               Already have an account?{" "}
-              <a
-                href="#"
-                title=""
-                className="font-medium text-secondary transition-all duration-200 hover:text-blue-700 focus:text-blue-700 hover:underline"
-              >
+              <Link href="/login">
+              <a className="font-medium text-secondary transition-all duration-200 hover:text-blue-700 focus:text-blue-700 hover:underline">
                 Login
               </a>
+              </Link>
             </p>
 
             <form
