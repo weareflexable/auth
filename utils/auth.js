@@ -23,9 +23,11 @@ export const signInWithProvider = async (provider) => {
     {
       provider,
     },
-    { redirectTo: `${process.env.NEXT_PUBLIC_MARKETPLACE}/bookings` }
+    // { redirectTo: `${process.env.NEXT_PUBLIC_MARKETPLACE}/bookings` }
   );
 
+  console.log(session)
+ 
   return { session, error };
 };
 

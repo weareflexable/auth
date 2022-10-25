@@ -21,19 +21,21 @@ const New = () => {
     }
     setIsSubmitting(true);
     const { error, session } = await signIn({ email, password });
+    console.log(session)
     if (error) {
       setIsSubmitting(false);
       toast.error(error.message);
     }
     if (session) {
       setIsSubmitting(false);
-      const paseto = getPlatformPaseto()
+      const paseto = getPlatformPaseto();
       toast.success("Logged in successfully");
-      router.push(`/https://localhost:3002/bookings/${paseto}`);
+      // router.push(`/https://localhost:3002/bookings/${paseto}`);
     }
   };
   const handleProviderLogin = async (provider) => {
     setIsSubmitting(true);
+    // this redirects whenever it's succesful
     const { error, user } = await signInWithProvider(provider);
     if (error) {
       toast.error(error.message);
@@ -41,7 +43,7 @@ const New = () => {
     if (user) {
       const paseto = getPlatformPaseto()
       toast.success("Logged in successfully");
-      router.push(`/https://localhost:3002/bookings/${paseto}`);
+      // router.push(`/https://localhost:3002/bookings/${paseto}`);
     }
     setIsSubmitting(false);
   };

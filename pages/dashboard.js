@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import withAuth from "../components/AuthWrapper";
 import Link from "next/link";
 import supabase from "../utils/supabaseClient";
+import { getPlatformPaseto } from "../src/storage";
 
 const Dashboard = () => {
   const router = useRouter();
