@@ -23,7 +23,7 @@ export const signInWithProvider = async (provider) => {
     {
       provider,
     },
-    // { redirectTo: `${process.env.NEXT_PUBLIC_MARKETPLACE}/bookings` }
+    // { redirectTo: `${process.env.NEXT_PUBLIC_MARKETPLACE}/bookings` } // no way to pass the paceto using this option
   );
 
   console.log(session)

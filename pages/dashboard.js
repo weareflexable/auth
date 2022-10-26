@@ -18,6 +18,12 @@ const Dashboard = () => {
     }
   };
 
+  useEffect(() => {
+    // get paseto
+    // add paseto to route parameter when you want to push
+    console.log(getPlatformPaseto())
+  }, []);
+
   // component
   return (
     <div className="min-h-[90vh] flex items-center justify-center gap-6 flex-col bg-gray-300">

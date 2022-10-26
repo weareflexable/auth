@@ -36,16 +36,21 @@ const New = () => {
   const handleProviderLogin = async (provider) => {
     setIsSubmitting(true);
     // this redirects whenever it's succesful
+    setIsSubmitting(true);
     const { error, user } = await signInWithProvider(provider);
+
+    // everything from here downwards is proving to be very useless.
     if (error) {
+      setIsSubmitting(false); 
       toast.error(error.message);
     }
     if (user) {
+      setIsSubmitting(false);
       const paseto = getPlatformPaseto()
       toast.success("Logged in successfully");
       // router.push(`/https://localhost:3002/bookings/${paseto}`);
     }
-    setIsSubmitting(false);
+    setIsSubmitting(false); 
   };
 
   return (
