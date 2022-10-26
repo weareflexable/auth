@@ -22,7 +22,7 @@ const Dashboard = () => {
     // get paseto
     // add paseto to route parameter when you want to push
     console.log(getPlatformPaseto())
-    router.push('https://localhost:3002/bookings')
+    // router.push('https://localhost:3002/bookings')
   }, []);
 
   // component

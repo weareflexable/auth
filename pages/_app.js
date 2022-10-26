@@ -42,7 +42,7 @@ function MyApp({ Component, pageProps }) {
           }); 
         }
         if (event === "SIGNED_OUT") {
-          setIsAuthenticated(false);
+          setIsAuthenticated(false); 
         }
       }
       );

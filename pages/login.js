@@ -4,6 +4,9 @@ import Link from "next/link";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import { signIn, signInWithProvider } from "../utils/auth";
+import { getPlatformPaseto ,setPlatformPaseto } from "../src/storage";
+import { getPaseto } from "../src/api/platform";
+import supabase from "../utils/supabaseClient";
 
 const New = () => {
   // todo: states
@@ -14,6 +17,7 @@ const New = () => {
 
   // todo: functions
   const handleSignIn = async (e) => {
+    console.log('you clicked me nigga')
     e.preventDefault();
     if (!email || !password) {
       toast.error("One or more fields are missing");
@@ -21,37 +25,43 @@ const New = () => {
     }
     setIsSubmitting(true);
     const { error, session } = await signIn({ email, password });
-    console.log(session)
+    console.log('login session',session)
     if (error) {
       setIsSubmitting(false);
-      toast.error(error.message);
+      toast.error(error.message); 
     }
     if (session) {
       setIsSubmitting(false);
-      const paseto = getPlatformPaseto();
+      // getPaseto(supabase.auth.session().access_token).then(setPlatformPaseto);
+      // const paseto = getPlatformPaseto();
       toast.success("Logged in successfully");
-      // router.push(`/https://localhost:3002/bookings/${paseto}`);
+      router.push(`/dashboard`);
     }
   };
+
   const handleProviderLogin = async (provider) => {
     setIsSubmitting(true);
     // this redirects whenever it's succesful
     setIsSubmitting(true);
     const { error, user } = await signInWithProvider(provider);
+    console.log('user',user)
+    console.log('error',error)
 
-    // everything from here downwards is proving to be very useless.
-    if (error) {
-      setIsSubmitting(false); 
-      toast.error(error.message);
-    }
-    if (user) {
-      setIsSubmitting(false);
-      const paseto = getPlatformPaseto()
-      toast.success("Logged in successfully");
-      // router.push(`/https://localhost:3002/bookings/${paseto}`);
-    }
+    // everything from here downwards is proving to be very useless, because logic
+    // _app.js is disrupting the entire flow
+
+    // if (error) {
+    //   setIsSubmitting(false); 
+    //   toast.error(error.message);
+    // }
+    // if (user) {
+    //   setIsSubmitting(false);
+    //   const paseto = getPlatformPaseto()
+    //   toast.success("Logged in successfully");
+    //   router.push(`/https://localhost:3002/bookings/${paseto}`);
     setIsSubmitting(false); 
-  };
+    }
+  // };
 
   return (
     <section className="h-full bg-gradient-to-r from-black to-primary">

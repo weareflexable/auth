@@ -19,23 +19,24 @@ export const signOut = async () => {
 
 // todo: single function to dynamically login using any provider
 export const signInWithProvider = async (provider) => {
-  const { session, error } = await supabase.auth.signIn(
-    {
-      provider,
-    },
-    // { redirectTo: `${process.env.NEXT_PUBLIC_MARKETPLACE}/bookings` } // no way to pass the paceto using this option
-  );
 
-  console.log(session)
+    const { session, error } = await supabase.auth.signIn(
+      {
+        provider,
+      },
+      // only redirects to a page in thesame domain
+      { redirectTo: `https://localhost:3004/dashboard` } // no way to pass the paceto using this option
+      );
+      return { session, error };
+
  
-  return { session, error };
 };
 
 // todo: sign up
 export const signUp = async ({ email, password }) => {
   const { user, session, error } = await supabase.auth.signUp(
     {
-      email,
+      email,  
       password,
     },
     { redirectTo: `${process.env.NEXT_PUBLIC_ORIGIN}/dashboard` }
