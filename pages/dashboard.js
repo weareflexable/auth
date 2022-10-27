@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import withAuth from "../components/AuthWrapper";
 import Link from "next/link";
 import supabase from "../utils/supabaseClient";
+import { getPlatformPaseto } from "../src/storage";
 
 const Dashboard = () => {
   const router = useRouter();
@@ -16,6 +17,11 @@ const Dashboard = () => {
       router.push("/login");
     }
   };
+
+  useEffect(() => { 
+    const paseto = getPlatformPaseto()
+    router.push(`https://localhost:3002/bookings?${paseto}`)
+  }, []);
 
   // component
   return (
