@@ -85,33 +85,6 @@ export default function Navbar({ isAuthenticated }) {
                   Dashboard{" "}
                 </a>
               </Link>
-
-              <a
-                href="#"
-                title=""
-                className="text-base text-white transition-all duration-200 hover:text-opacity-80"
-              >
-                {" "}
-                Solutions{" "}
-              </a>
-
-              <a
-                href="#"
-                title=""
-                className="text-base text-white transition-all duration-200 hover:text-opacity-80"
-              >
-                {" "}
-                Resources{" "}
-              </a>
-
-              <a
-                href="#"
-                title=""
-                className="text-base text-white transition-all duration-200 hover:text-opacity-80"
-              >
-                {" "}
-                Pricing{" "}
-              </a>
             </div>
 
             {isAuthenticated ? (
