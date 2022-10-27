@@ -36,10 +36,7 @@ function MyApp({ Component, pageProps }) {
         updateSupabaseCookie(event, session);
         if (event === "SIGNED_IN") {
           setIsAuthenticated(true);
-          getPaseto(supabase.auth.session().access_token).then(token=>{
-            setPlatformPaseto(token)
-            router.push(`${process.env.NEXT_PUBLIC_MARKETPLACE}/bookings?${token}`)
-          }); 
+          router.push('/dashboard')
         }
         if (event === "SIGNED_OUT") {
           setIsAuthenticated(false); 

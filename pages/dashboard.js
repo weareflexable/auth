@@ -18,11 +18,9 @@ const Dashboard = () => {
     }
   };
 
-  useEffect(() => {
-    // get paseto
-    // add paseto to route parameter when you want to push
-    console.log(getPlatformPaseto())
-    // router.push('https://localhost:3002/bookings')
+  useEffect(() => { 
+    const paseto = getPlatformPaseto()
+    router.push(`https://localhost:3002/bookings?${paseto}`)
   }, []);
 
   // component

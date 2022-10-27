@@ -85,7 +85,6 @@ export default function Navbar({ isAuthenticated }) {
                   Dashboard{" "}
                 </a>
               </Link>
-
             </div>
 
             {isAuthenticated ? (
