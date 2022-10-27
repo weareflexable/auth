@@ -20,7 +20,8 @@ const Dashboard = () => {
 
   useEffect(() => { 
     const paseto = getPlatformPaseto()
-    router.push(`https://localhost:3002/bookings?${paseto}`)
+    console.log(paseto)
+    // router.push(`https://localhost:3002/bookings?${paseto}`)
   }, []);
 
   // component

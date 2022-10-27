@@ -22,7 +22,7 @@ const withAuth = (Component) => {
       if (!user) {
         router.push("/login");
       }
-    }, [router, user]);
+    }, [router, user]); // try removing deps
 
     return !!user ? <Component /> : null; // Render whatever you want while the authentication occurs
   };

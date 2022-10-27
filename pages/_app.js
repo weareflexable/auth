@@ -47,7 +47,7 @@ function MyApp({ Component, pageProps }) {
       return () => {
         authListener?.unsubscribe();
       };
-    }, [router]);
+    }, [router]); // try removing deps
 
   async function updateSupabaseCookie(event, session) {
     await axios.post("/api/auth", { event, session });
@@ -63,7 +63,7 @@ function MyApp({ Component, pageProps }) {
           autoClose={5000}
           hideProgressBar={false}
           closeOnClick={true}
-          pauseOnHover={true}
+          pauseOnHover={true} 
           draggable={true}
           dark
         />
