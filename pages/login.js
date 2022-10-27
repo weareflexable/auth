@@ -74,7 +74,7 @@ const New = () => {
                   </div>
                   <span className="text-lg font-medium text-white">
                     {" "}
-                    Superfast Processing{" "}
+                    Night life{" "}
                   </span>
                 </li>
                 <li className="flex items-center space-x-3">
@@ -94,7 +94,7 @@ const New = () => {
                   </div>
                   <span className="text-lg font-medium text-white">
                     {" "}
-                    Several Services{" "}
+                    Restaurant{" "}
                   </span>
                 </li>
                 <li className="flex items-center space-x-3">
@@ -114,10 +114,10 @@ const New = () => {
                   </div>
                   <span className="text-lg font-medium text-white">
                     {" "}
-                    All In One Solution{" "}
+                    Unlimited access{" "}
                   </span>
                 </li>
-                <li className="flex items-center space-x-3">
+                {/* <li className="flex items-center space-x-3">
                   <div className="inline-flex items-center justify-center flex-shrink-0 w-5 h-5 bg-blue-500 rounded-full">
                     <svg
                       className="w-3.5 h-3.5 text-white"
@@ -136,7 +136,7 @@ const New = () => {
                     {" "}
                     Flex It{" "}
                   </span>
-                </li>
+                </li> */}
               </ul>
             </div>
           </div>

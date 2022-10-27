@@ -7,11 +7,10 @@ const Home = () => {
     <main className="h-full bg-gradient-to-b from-black via-black to-primary flex flex-col">
       <div className=" flex items-center pt-16 md:pt-32 px-6 flex-col">
         <h1 className="text-[#8cb9b4] text-4xl text-center leading-[130%] w-5/6 md:text-5xl ">
-          You will never be in a queue again.
+          Why wait in the line when you could just... not.
         </h1>
         <p className="text-gray-400 w-4/6 md:w-3/6 text-center leading-[150%] mt-5 mb-8">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum quas,
-          nesciunt odio optio obcaecati consectetur dolor earum cum dicta harum.
+          
         </p>
         <Link href="/register">
           <a className=" px-4 py-1 bg-secondary text-primary rounded-md font-bold flex items-center justify-center gap-3">
@@ -34,7 +33,7 @@ const Home = () => {
       </div>
       <div className="flex items-center justify-center px-6 grow">
         <p className="text-4xl lg:text-6xl md:text-5xl text-center leading-[150%] bg-clip-text font-bold font-heading bg-gradient-to-r from-gray-300 text-transparent via-accent to-secondary">
-          #WeAreFlexable
+          #WeGetYouIn
         </p>
       </div>
     </main>
