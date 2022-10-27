@@ -133,10 +133,10 @@ const New = () => {
                   </div>
                   <span className="text-lg font-medium text-white">
                     {" "}
-                    Unlimited access{" "}
+                    Exclusive access{" "}
                   </span>
                 </li>
-                {/* <li className="flex items-center space-x-3">
+                <li className="flex items-center space-x-3">
                   <div className="inline-flex items-center justify-center flex-shrink-0 w-5 h-5 bg-blue-500 rounded-full">
                     <svg
                       className="w-3.5 h-3.5 text-white"
@@ -153,9 +153,9 @@ const New = () => {
                   </div>
                   <span className="text-lg font-medium text-white">
                     {" "}
-                    Flex It{" "}
+                    Community{" "}
                   </span>
-                </li> */}
+                </li>
               </ul>
             </div>
           </div>
