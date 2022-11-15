@@ -12,13 +12,7 @@ import Redirect from '../components/Redirect'
 
 const Dashboard = () => {
   const {isAuthenticated, paseto} = useAuthContext()
-  // console.log(isAuthenticated,paseto)
 
-  useEffect(() => {
-    if(!paseto){
-      // console.log('execute shit here')
-    }
-  }, [paseto]);
 
   if(!paseto){
     return <div>loading...</div>

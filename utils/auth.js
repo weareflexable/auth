@@ -25,7 +25,7 @@ export const signInWithProvider = async (provider) => {
         provider,
       },
       // only redirects to a page in thesame domain
-      { redirectTo: `https://localhost:3002/dashboard` } // no way to pass the paceto using this option
+      { redirectTo: `https://auth.flexabledats.com/dashboard` } // no way to pass the paceto using this option
       );
       return { session, error };
 

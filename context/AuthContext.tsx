@@ -23,10 +23,8 @@ const AuthContextProvider = ({children}:AuthContextProviderProps)=>{
     const [isAuthenticated, setIsAuthenticated] = useState(false)
     const [paseto, setPaseto] = useState(null)
   
-    console.log('outsde',isAuthenticated)
     
     useEffect(() => {
-        console.log('inside',isAuthenticated)
       if (isAuthenticated && !getPlatformPaseto()) {
         getPaseto(supabase.auth.session().access_token).then(paseto=>{
             setPaseto(paseto)
@@ -40,7 +38,6 @@ const AuthContextProvider = ({children}:AuthContextProviderProps)=>{
       // checks if user already signed in when they land
       const user = checkUser();
       if (user) {
-        console.log('is user')
         setIsAuthenticated(true);
       }
       
