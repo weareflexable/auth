@@ -24,7 +24,7 @@ export default function Navbar({ isAuthenticated }) {
     const session = await supabase.auth.session();
     console.log(session);
   };
-  console.log(isAuthenticated);
+
   return (
     <>
       <header className="bg-black h-[8vh]">

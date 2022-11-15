@@ -14,10 +14,11 @@ const New = () => {
   const [password, setPassword] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
+  const {redirect_to} = router.query
 
   // todo: functions
   const handleSignIn = async (e) => {
-    console.log('you clicked me nigga')
+    localStorage.setItem('redirect_to',redirect_to)
     e.preventDefault();
     if (!email || !password) {
       toast.error("One or more fields are missing");
@@ -40,6 +41,7 @@ const New = () => {
   };
 
   const handleProviderLogin = async (provider) => {
+    localStorage.setItem('redirect_to',redirect_to)
     setIsSubmitting(true);
     // this redirects whenever it's succesful
     setIsSubmitting(true);

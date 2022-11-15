@@ -7,7 +7,7 @@ const withAuth = (Component) => {
   const AuthenticatedComponent = () => {
     const router = useRouter();
     const [user, setUser] = useState(supabase.auth.user());
-
+console.log(user)
     useEffect(() => {
       // const getUser = async () => {
       //   const user = await supabase.auth.user();
@@ -20,7 +20,7 @@ const withAuth = (Component) => {
       // };
       // getUser();
       if (!user) {
-        router.push("/login");
+        // router.push("/login");
       }
     }, [router, user]); // try removing deps
 
