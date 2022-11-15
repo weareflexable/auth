@@ -8,15 +8,15 @@ import supabase from "../utils/supabaseClient";
 import { getPlatformPaseto,setPlatformPaseto } from "../src/storage";
 import { getPaseto } from "../src/api/platform";
 import { useAuthContext } from "../context/AuthContext";
+import Redirect from '../components/Redirect'
 
 const Dashboard = () => {
-  const router = useRouter();
   const {isAuthenticated, paseto} = useAuthContext()
-  console.log(isAuthenticated,paseto)
+  // console.log(isAuthenticated,paseto)
 
   useEffect(() => {
     if(!paseto){
-      console.log('execute shit here')
+      // console.log('execute shit here')
     }
   }, [paseto]);
 
@@ -29,6 +29,7 @@ const Dashboard = () => {
     <div className="min-h-[90vh] flex items-center justify-center gap-6 flex-col bg-gray-300">
       <h1 className="px-5 py-2 rounded-lg bg-gray-800 text-white shadow-lg">
         Dashboard
+        <Redirect/>
       </h1>
     </div>
   );
