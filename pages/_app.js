@@ -9,10 +9,10 @@ import { checkUser } from "../utils/auth";
 import axios from "axios";
 import { getPlatformPaseto, setPlatformPaseto } from "../src/storage";
 import { getPaseto } from "../src/api/platform";
-import {useAuthContext, AuthContextProvider} from '../context/AuthContext'
+import {AuthContextProvider} from '../context/AuthContext'
 
 function MyApp({ Component, pageProps }) {
-  // const {isAuthenticated} = useAuthContext()
+
 
   return (
     <>
