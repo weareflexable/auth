@@ -1,0 +1,5 @@
+namespace: flexable
+host: auth.flexabledats.com
+name: auth
+alb_group_name: flexable-alb
+port: 3000
