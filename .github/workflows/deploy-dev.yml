@@ -1,7 +1,7 @@
 name: "[DEV] Deploy to EKS"
 on:
   push:
-    branches: [main,thisisommore/introduce-dev-env-5]
+    branches: [main]
 
 jobs:
   build:
