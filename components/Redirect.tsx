@@ -14,7 +14,7 @@ export default function Redirect(){
     useEffect(() => {
         const redirectTo = localStorage.getItem('redirect_to')
         const paseto = localStorage.getItem('PLATFORM_PASETO')
-        const redirectUrl = redirectTo === 'portal'?`${process.env.NEXT_PUBLIC_PORTAL}/login?paseto=${paseto}`:`${process.env.NEXT_PUBLIC_MARKETPLACE}`
+        const redirectUrl = redirectTo === 'portal'?`${process.env.NEXT_PUBLIC_PORTAL}/login?paseto=${paseto}`:`${process.env.NEXT_PUBLIC_MARKETPLACE}?paseto=${paseto}`
         setTimeout(()=>{
             router.replace(redirectUrl)
             setIsRedirecting(false)
