@@ -16,7 +16,7 @@ export default function Redirect(){
         const paseto = localStorage.getItem('PLATFORM_PASETO')
         console.log(redirectTo)
         // const redirectUrl = redirectTo === 'portal'?`${process.env.NEXT_PUBLIC_PORTAL}/login?paseto=${paseto}`:`${process.env.NEXT_PUBLIC_MARKETPLACE}?paseto=${paseto}`
-        const redirectUrl = redirectTo === 'portal'?`http://localhost:3000/login?paseto=${paseto}`:`http://localhost:3001?paseto=${paseto}`
+        const redirectUrl = redirectTo === 'portal'?`http://localhost:3000/login?paseto=${paseto}`:`'https://marketplace.dev.flexabledats.com'?paseto=${paseto}`
         setTimeout(()=>{
             router.replace(redirectUrl)
             setIsRedirecting(false)
