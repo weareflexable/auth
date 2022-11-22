@@ -175,14 +175,13 @@ const New = () => {
             </h2>
             <p className="mt-2 text-base text-gray-400">
               Don&apos;t have an account?
-              <Link onClick={handleRegister}>
+              <p onClick={handleRegister}>
                 <a
-                  title=""
                   className="font-medium text-secondary transition-all duration-200 hover:text-blue-700 focus:text-blue-700 hover:underline"
                 >
                   Sign Up
                 </a>
-              </Link>
+              </p>
             </p>
 
             <form onSubmit={handleSignIn} className="mt-8">
