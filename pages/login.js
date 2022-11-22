@@ -65,6 +65,11 @@ const New = () => {
     }
   // };
 
+  function handleRegister(){
+    localStorage.setItem('redirect_to',redirect_to)
+    router.push('/register')
+  }
+
   return (
     <section className="h-full bg-gradient-to-r from-black to-primary">
       <div className="grid grid-cols-1 lg:grid-cols-2">
@@ -170,7 +175,7 @@ const New = () => {
             </h2>
             <p className="mt-2 text-base text-gray-400">
               Don&apos;t have an account?
-              <Link href="/register">
+              <Link onClick={handleRegister}>
                 <a
                   title=""
                   className="font-medium text-secondary transition-all duration-200 hover:text-blue-700 focus:text-blue-700 hover:underline"
