@@ -5,6 +5,9 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    fontFamily: {
+      figtree: ["Figtree"],
+    },
     extend: {
       colors: {
         primary: "#010B14",
