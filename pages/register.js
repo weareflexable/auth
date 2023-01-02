@@ -42,8 +42,8 @@ const Register = () => {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row md:flex-row h-screen">
-      <div className="flex flex-col bg-[#242525] lg:w-3/5 md:w-1/2 items-center justify-start">
+    <div className="flex flex-col lg:flex-row h-screen">
+      <div className="flex flex-col bg-[#242525] md:pb-20 lg:w-3/5 items-center justify-start">
         <div
           className="-mt-8
          hidden lg:block"
@@ -70,7 +70,7 @@ const Register = () => {
           <h1 className="lg:text-7xl text-6xl text-[#A6A6A7] font-semibold font-figtree text-center lg:text-left">
             Forget Queues
           </h1>
-          <div className="flex lg:mt-4 mb-12 lg:mb-0 mt-6">
+          <div className="flex lg:mt-4 mb-12 lg:mb-0 mt-6 justify-center">
             <div className="flex flex-col mr-12 text-[#A6A6A7] font-figtree lg:text-left text-center">
               <div className="flex">
                 <Image
@@ -114,7 +114,7 @@ const Register = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col bg-black lg:w-2/5 md:w-1/2 text-center lg:text-left items-center justify-center h-screen">
+      <div className="flex flex-col bg-black lg:w-2/5 text-center lg:text-left items-center justify-center flex-grow">
         <h1 className="text-3xl font-figtree text-white font-semibold lg:mt-0 mb-8 md:mt-4">
           Sign Up
         </h1>
@@ -150,8 +150,8 @@ const Register = () => {
           >
             Sign Up
           </button>
-          <div className="flex mt-2 justify-center">
-            <p className="font-figtree text-white">Already hhave an account?</p>
+          <div className="flex mt-2 justify-center md:mb-8">
+            <p className="font-figtree text-white">Already have an account?</p>
 
             <p className="text-[#1AFAA6] font-figtree ml-1.5">
               <Link href="/login">Login</Link>

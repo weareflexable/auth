@@ -73,8 +73,8 @@ const Login = () => {
   }
 
   return (
-    <div className="flex flex-col lg:flex-row md:flex-row h-screen">
-      <div className="flex flex-col bg-[#242525] lg:w-1/2 md:w-1/2 items-center justify-start ">
+    <div className=" flex flex-col lg:flex-row h-screen">
+      <div className="flex flex-col md:pb-20 bg-[#242525] lg:w-1/2 items-center justify-start">
         <div
           className="-mt-8
          hidden lg:block"
@@ -145,7 +145,7 @@ const Login = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col bg-black lg:w-1/2 md:w-1/2 text-center lg:text-left items-center justify-center h-screen ">
+      <div className="flex flex-col flex-grow bg-black lg:w-1/2 text-center lg:text-left items-center justify-center ">
         <h1 className="text-3xl font-figtree text-white font-semibold lg:mt-0 mb-8 md:mt-4">
           Login
         </h1>
@@ -187,7 +187,7 @@ const Login = () => {
               <Link href="/register">Sign up</Link>
             </p>
           </div>
-          <div className="flex justify-center mt-1.5">
+          <div className="flex justify-center mt-1.5 md:mb-8">
             <p className="font-figtree text-[#1AFAA6]">
               <Link href="/forgot-password">Forgot password?</Link>
             </p>
