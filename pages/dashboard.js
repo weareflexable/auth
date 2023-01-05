@@ -23,7 +23,7 @@ const Dashboard = () => {
     <div className="h-screen flex flex-col items-center justify-start gap-6 bg-black">
       <div className="mb-24 mt-20">
         <Image
-          src="/logos/FlexableLogoWhite.svg"
+          src="/logos/logo.svg"
           alt="flexable-logo"
           width={200}
           height={200}
