@@ -10,4 +10,6 @@ export interface PostAuthPayload {
 
 export interface PostAuthRequest {
     supabaseToken: string
+    device_type: string
+    provider: string
 }
