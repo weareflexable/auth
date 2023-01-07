@@ -152,7 +152,6 @@ const Register = () => {
             <button
               className="btn btn-primary mt-8 bg-[#AB4DF7] font-figtree font-semibold w-full h-10 rounded-3xl"
               type="submit"
-              disabled={isSubmitting || !email || !password || !retypedPassword}
             >
               Sign Up
             </button>
