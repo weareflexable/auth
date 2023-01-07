@@ -25,6 +25,7 @@ const AuthContextProvider = ({children}:AuthContextProviderProps)=>{
   
     
     useEffect(() => {
+      // console.log(supabase.auth.session().access_token)
       if (isAuthenticated && !getPlatformPaseto()) {
         getPaseto(supabase.auth.session().access_token).then(paseto=>{
             setPaseto(paseto)
