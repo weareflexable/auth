@@ -80,7 +80,7 @@ const Login = () => {
         <link rel="icon" href="/logos/logo_colored.png" />
       </Head>
       <div className=" flex flex-col lg:flex-row h-screen">
-        <div className="flex flex-col md:pb-20 bg-[#242525] lg:w-1/2 items-center justify-start">
+        <div className="flex flex-col md:pb-8 bg-[#242525] lg:w-1/2 items-center justify-start">
           <div
             className="mb-8
          hidden lg:block"
@@ -96,16 +96,16 @@ const Login = () => {
             <Image
               src="/logos/logo.svg"
               alt="flexable-logo"
-              width={150}
-              height={150}
+              width={200}
+              height={200}
             />
           </div>
           <div className="flex flex-col lg:mt-32 -mt-2 text-center lg:text-left">
             <h3 className="lg:text-5xl text-4xl text-white font-semibold font-figtree lg:mb-2">
               Sign In &
             </h3>
-            <h1 className="lg:text-7xl text-6xl text-[#A6A6A7] font-semibold font-figtree text-center lg:text-left">
-              Be Flexable
+            <h1 className="lg:text-6xl text-5xl text-[#A6A6A7] font-semibold font-figtree text-center lg:text-left">
+              Get access to:
             </h1>
             <div className="flex lg:mt-4 mb-12 lg:mb-0 mt-6">
               <div className="flex flex-col mr-12 text-[#A6A6A7] font-figtree lg:text-left text-center">
@@ -125,7 +125,7 @@ const Login = () => {
                     width={15}
                     height={15}
                   />
-                  <span className="ml-1.5">Restaurant</span>
+                  <span className="ml-1.5">Restaurants</span>
                 </div>
               </div>
               <div className="flex flex-col text-[#A6A6A7] font-figtree">
@@ -136,7 +136,7 @@ const Login = () => {
                     width={15}
                     height={15}
                   />
-                  <span className="ml-1.5">Community</span>
+                  <span className="ml-1.5">Memberships</span>
                 </div>
                 <div className="flex">
                   <Image
@@ -145,18 +145,18 @@ const Login = () => {
                     width={15}
                     height={15}
                   />
-                  <span className="ml-1.5">Exclusive access</span>
+                  <span className="ml-1.5">Events & more</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
         <div className="flex flex-col flex-grow bg-black lg:w-1/2 text-center lg:text-left items-center justify-center ">
-          <h1 className="text-3xl font-figtree text-white font-semibold lg:mt-0 mb-8 md:mt-4">
+          <h1 className="text-3xl font-figtree text-white font-semibold lg:mt-0 mb-8 mt-8">
             Login
           </h1>
           <button
-            className="bg-transparent font-figtree border-2 border-[#2A2B2A] text-[#1AFAA6] rounded-3xl w-80 h-10 md:mt-4 mb-6"
+            className="bg-transparent font-figtree border-2 border-[#2A2B2A] text-[#AB4DF7] rounded-3xl w-80 h-10 md:mt-4 mb-6"
             onClick={() => handleProviderLogin("google")}
           >
             Continue with Google
@@ -164,7 +164,7 @@ const Login = () => {
           <span className="font-figtree font-bold text-[#6E6E6F] mb-8">OR</span>
           <form onSubmit={handleSignIn}>
             <input
-              className="form-input rounded-sm shadow-sm mb-4 w-full pl-2 h-12 bg-transparent border-2 text-[#6E6E6F] font-figtree border-[#2A2B2A]"
+              className="form-input rounded-sm shadow-sm mb-4 w-[95%] md:w-full pl-2 h-12 bg-transparent border-2 text-[#6E6E6F] font-figtree border-[#2A2B2A] "
               type="email"
               id="email"
               placeholder="Email"
@@ -172,7 +172,7 @@ const Login = () => {
               onChange={(event) => setEmail(event.target.value)}
             />
             <input
-              className="form-input rounded-sm shadow-sm w-full pl-2 h-12 bg-transparent border-2 text-[#6E6E6F] font-figtree border-[#2A2B2A]"
+              className="form-input rounded-sm shadow-sm w-[95%] md:w-full pl-2 h-12 bg-transparent border-2 text-[#6E6E6F] font-figtree border-[#2A2B2A]"
               type="password"
               id="password"
               placeholder="Password"
@@ -180,7 +180,7 @@ const Login = () => {
               onChange={(event) => setPassword(event.target.value)}
             />
             <button
-              className="btn btn-primary mt-8 bg-[#1AFAA6] font-figtree font-semibold w-full h-10 rounded-3xl"
+              className="btn btn-primary mt-8 bg-[#AB4DF7] font-figtree font-semibold w-[95%] md:w-full h-10 rounded-3xl"
               type="submit"
               disabled={isSubmitting || !email || !password}
             >
@@ -189,12 +189,12 @@ const Login = () => {
             <div className="flex mt-2 justify-center">
               <p className="font-figtree text-white">No account?</p>
 
-              <p className="text-[#1AFAA6] font-figtree ml-1.5">
+              <p className="text-[#AB4DF7] font-figtree ml-1.5">
                 <Link href="/register">Sign up</Link>
               </p>
             </div>
-            <div className="flex justify-center mt-1.5 md:mb-8">
-              <p className="font-figtree text-[#1AFAA6]">
+            <div className="flex justify-center mt-1.5 mb-16">
+              <p className="font-figtree text-[#AB4DF7]">
                 <Link href="/forgot-password">Forgot password?</Link>
               </p>
             </div>
