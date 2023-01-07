@@ -74,7 +74,7 @@ const UpdatePassword = () => {
               className="block text-gray-400 font-figtree text-sm font-bold mb-2"
               for="password"
             >
-              Password
+              Confirm Password
             </label>
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -87,7 +87,7 @@ const UpdatePassword = () => {
           </div>
           <div className="flex items-center justify-between">
             <button
-              className="bg-[#1afaa6] text-black hover:bg-transparent border-2 hover:text-white border-[#1afaa6] font-bold py-2 px-4 rounded-3xl focus:outline-none focus:shadow-outline"
+              className="bg-[#AB4DF7] text-black hover:bg-transparent border-2 hover:text-white border-[#AB4DF7] font-bold py-2 px-4 rounded-3xl focus:outline-none focus:shadow-outline"
               type="submit"
               disabled={isSubmitting}
             >
