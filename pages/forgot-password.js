@@ -65,7 +65,7 @@ const ForgotPassword = () => {
           </div>
           <div className="flex items-center justify-between">
             <button
-              className="bg-[#1afaa6] text-black hover:bg-transparent border-2 hover:text-white border-[#1afaa6] font-bold py-2 px-4 rounded-3xl focus:outline-none focus:shadow-outline"
+              className="bg-[#AB4DF7] text-black hover:bg-transparent border-2 hover:text-white border-[#AB4DF7] font-bold py-2 px-4 rounded-3xl focus:outline-none focus:shadow-outline"
               type="submit"
               disabled={isSubmitting || !email}
             >
@@ -74,7 +74,7 @@ const ForgotPassword = () => {
             <div className="flex font-figtree">
               <span className="text-gray-400">
                 Back to
-                <div className="inline-block align-baseline text-[#1afaa6] ml-1.5">
+                <div className="inline-block align-baseline text-[#AB4DF7] ml-1.5">
                   <Link href="/login">Sign In</Link>
                 </div>
               </span>
