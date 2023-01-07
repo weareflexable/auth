@@ -81,10 +81,7 @@ const Login = () => {
       </Head>
       <div className=" flex flex-col lg:flex-row h-screen">
         <div className="flex flex-col md:pb-8 bg-[#242525] lg:w-1/2 items-center justify-start">
-          <div
-            className="mb-8
-         hidden lg:block"
-          >
+          <div className="hidden lg:block">
             <Image
               src="/logos/logo.svg"
               alt="flexable-logo"
