@@ -4,10 +4,10 @@ import { ApiResponse, PostAuthPayload, PostAuthRequest } from "./types"
 export const getPaseto = async (supabaseToken: string): Promise<string> => {
     const req: PostAuthRequest = {
         provider:'supabase',
-        supabaseToken,
+        token:supabaseToken,
         device_type:'web' // TODO: detect device type from user device
     }
-    const authRes = await axiosApp.post<ApiResponse<PostAuthPayload>>("auth/web2", req)
+    const authRes = await axiosApp.post("auth/web2", req)
 
-    return authRes.data.payload.token
+    return authRes.data.token
 }
