@@ -17,7 +17,7 @@ export default function Redirect() {
         const redirectUrl = redirectTo === 'portal' ? `${process.env.NEXT_PUBLIC_PORTAL}?paseto=${paseto}` : `${process.env.NEXT_PUBLIC_MARKETPLACE}?paseto=${paseto}`
         // const redirectUrl = redirectTo === 'portal'?`http://localhost:3000/login?paseto=${paseto}`:`http://localhost:3001?paseto=${paseto}`
         setTimeout(() => {
-            // router.replace(redirectUrl)
+            router.replace(redirectUrl)
             setIsRedirecting(false)
             // clear storage
             localStorage.removeItem('PLATFORM_PASETO')
