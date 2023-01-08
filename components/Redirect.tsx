@@ -23,18 +23,17 @@ export default function Redirect() {
             localStorage.removeItem('PLATFORM_PASETO')
             localStorage.removeItem('redirect_to')
             supabase.auth.signOut()
-            // redirect user to portal
         }, 4000)
     }, [router])
 
-    if (!isRedirecting) {
-        return (
-            <div className="text-white flex flex-col items-center text-center">
-                <h1 className="text-5xl font-bold font-figtree">Redirected!</h1>
-                <span className="mt-4 w-[50%]">You&nbsp;re being redirected to another page. It may take a while so sit tight and stay flexable!</span>
-            </div>
-        )
-    }
+    // if (!isRedirecting) {
+    //     return (
+    //         <div className="text-white flex flex-col items-center text-center">
+    //             <h1 className="text-5xl font-bold font-figtree">Redirected!</h1>
+    //             <span className="mt-4 w-[50%]">You&nbsp;re being redirected to another page. It may take a while so sit tight and stay flexable!</span>
+    //         </div>
+    //     )
+    // }
 
     return (
         <div className="text-white flex flex-col items-center text-center">

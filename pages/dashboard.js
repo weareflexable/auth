@@ -14,9 +14,10 @@ import Image from "next/image";
 const Dashboard = () => {
   const { isAuthenticated, paseto } = useAuthContext();
 
-  if (!paseto) {
-    return <div>loading...</div>;
-  }
+  // TODO: remove this component
+  // if (!paseto) {
+  //   return <div>loading...</div>;
+  // }
 
   // component
   return (

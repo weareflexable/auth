@@ -49,18 +49,6 @@ const Login = () => {
     setIsSubmitting(true);
     const { error, user } = await signInWithProvider(provider);
 
-    // everything from here downwards is proving to be very useless, because logic
-    // _app.js is disrupting the entire flow
-
-    // if (error) {
-    //   setIsSubmitting(false);
-    //   toast.error(error.message);
-    // }
-    // if (user) {
-    //   setIsSubmitting(false);
-    //   const paseto = getPlatformPaseto()
-    //   toast.success("Logged in successfully");
-    //   router.push(`/https://localhost:3002/bookings/${paseto}`);
     setIsSubmitting(false);
   };
   // };
@@ -183,8 +171,8 @@ const Login = () => {
             <div className="flex mt-2 justify-center">
               <p className="font-figtree text-white">No account?</p>
 
-              <p className="text-[#AB4DF7] font-figtree ml-1.5">
-                <Link href="/register">Sign up</Link>
+              <p onClick={handleRegister} className="text-[#AB4DF7] font-figtree ml-1.5">
+                Sign up
               </p>
             </div>
             <div className="flex justify-center mt-1.5 mb-16">
