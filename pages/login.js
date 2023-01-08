@@ -48,8 +48,6 @@ const Login = () => {
     // this redirects whenever it's succesful
     setIsSubmitting(true);
     const { error, user } = await signInWithProvider(provider);
-    console.log("user", user);
-    console.log("error", error);
 
     // everything from here downwards is proving to be very useless, because logic
     // _app.js is disrupting the entire flow
