@@ -1,7 +1,8 @@
 export interface ApiResponse<T> {
     status: number
     message: string
-    payload: T
+    // payload: T
+    data: T
 }
 
 export interface PostAuthPayload {
@@ -9,5 +10,7 @@ export interface PostAuthPayload {
 }
 
 export interface PostAuthRequest {
-    supabaseToken: string
+    token: string
+    device_type: string
+    provider: string
 }
