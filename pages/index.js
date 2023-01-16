@@ -1,41 +1,8 @@
 import React from "react";
-import Link from "next/link";
-import { FaHandshake } from "react-icons/fa";
+import Login from "./login";
 
 const Home = () => {
-  return (
-    <main className="h-screen bg-gradient-to-b from-black via-black to-primary flex flex-col">
-      <div className=" flex items-center pt-16 md:pt-32 px-6 flex-col">
-        <h1 className="text-[#C380F9] text-4xl text-center leading-[130%] w-5/6 md:text-5xl ">
-          Why wait in the line when you could just... not.
-        </h1>
-        <p className="text-gray-400 w-4/6 md:w-3/6 text-center leading-[150%] mt-5 mb-8"></p>
-        <Link href="/register">
-          <a className=" px-4 py-1 bg-[#AB4DF7] text-primary rounded-md font-bold flex items-center justify-center gap-3">
-            <FaHandshake /> Join Now
-          </a>
-        </Link>
-        <p className="text-gray-500 my-4 text-xs">or</p>
-        <Link href="/login">
-          <a className="text-[#AB4DF7] opacity-75 font-light text-sm">
-            Sign in
-          </a>
-        </Link>
-
-        {/* <p className="text-gray-500 text-xs mt-3 flex items-center justify-center gap-3">
-          Already joined?{" "}
-          <Link href="/login">
-            <a className="text-secondary text-base">Sign in</a>
-          </Link>
-        </p> */}
-      </div>
-      <div className="flex items-center justify-center px-6 grow">
-        <p className="text-4xl lg:text-6xl md:text-5xl text-center leading-[150%] bg-clip-text font-bold font-heading bg-gradient-to-r from-gray-200 text-transparent via-[#C380F9] to-[#AB4DF7]">
-          #WeGetYouIn
-        </p>
-      </div>
-    </main>
-  );
+  return <Login />;
 };
 
 export default Home;
