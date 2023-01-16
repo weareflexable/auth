@@ -1,13 +1,14 @@
-import { axiosApp } from "./config"
-import { ApiResponse, PostAuthPayload, PostAuthRequest } from "./types"
+import { axiosApp } from "./config";
+import { ApiResponse, PostAuthPayload, PostAuthRequest } from "./types";
+import { isMobile } from "react-device-detect";
 
 export const getPaseto = async (supabaseToken: string): Promise<string> => {
-    const req: PostAuthRequest = {
-        provider:'supabase',
-        token:supabaseToken,
-        device_type:'web' // TODO: detect device type from user device
-    }
-    const authRes = await axiosApp.post("auth/web2", req)
+  const req: PostAuthRequest = {
+    provider: "supabase",
+    token: supabaseToken,
+    device_type: isMobile ? "mobile" : "web", // TODO: detect device type from user device
+  };
+  const authRes = await axiosApp.post("auth/web2", req);
 
-    return authRes.data.token
-}
+  return authRes.data.token;
+};
