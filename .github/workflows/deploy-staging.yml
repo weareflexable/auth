@@ -1,0 +1,54 @@
+name: "[STAGING] Build and Push to GHCR"
+on:
+  push:
+    branches: [staging]
+
+jobs:
+  next-build:
+    name: Buid Image
+    runs-on: ubuntu-latest
+    container: node:16-alpine           # Use node:16-alpine container version, same as Dockerfile base image
+    steps:
+      - name: Code Checkout
+        uses: actions/checkout@v2       # Checkout the code
+      env:
+          STAGING_ENV_FILE: ${{ secrets.STAGING_ENV }}
+      - run: |
+          echo "$STAGING_ENV_FILE" | base64 -d > .env
+          npm ci
+          npm run build
+      - name: Upload Next build          # Upload the artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: build
+          path: |
+            .next
+            public
+          retention-days: 7         # artifact retention duration, can be upto 30 days
+  docker-push:
+    name:
+    needs: next-build               # Job depends on next-build(above) job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Download next build       # Download the above uploaded artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: build
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.GHCR_USERNAME }}
+          password: ${{ secrets.GHCR_TOKEN }}
+      - name: Build and Push Docker Image
+        run: |
+          export CURRENT_BRANCH=${GITHUB_REF#refs/heads/}
+          export TAG=$([[ $CURRENT_BRANCH == "staging" ]] && echo "latest" || echo $CURRENT_BRANCH)
+          export GITHUB_REF_IMAGE=ghcr.io/$GITHUB_REPOSITORY:$GITHUB_SHA
+          export GITHUB_BRANCH_IMAGE=ghcr.io/$GITHUB_REPOSITORY:$TAG
+          docker build -t $GCR_IMAGE -t $GITHUB_REF_IMAGE -t $GITHUB_BRANCH_IMAGE .
+          echo "Pushing Image to GitHub Container Registry"
+          docker push $GITHUB_REF_IMAGE
+          docker push $GITHUB_BRANCH_IMAGE
