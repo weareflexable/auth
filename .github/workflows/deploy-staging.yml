@@ -26,23 +26,15 @@ jobs:
          # If source files changed but packages didn't, rebuild from a prior cache. 
          restore-keys: |
            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
-      
-      - name: Generate .env file
-        run: |
-          if [ "$GITHUB_REF_NAME" = staging ]; then echo $STAGING_ENV_FILE | base64 --decode > .env.local; fi
-          if [ "$GITHUB_REF_NAME" = prod ]; then echo $PROD_ENV_FILE | base64 --decode > .env.local; fi
-      
-      - name: Load .env file
-        uses: natterstefan/action-next-env@v1
-        with:
-          path: ${{ github.workspace }}/.   # optional, default: .
-          environment: staging
-      
+          
       - name: NextJS Build 
         run: |
-          echo "Supabase URL: ${{ env.NEXT_PUBLIC_SUPABASE_URL }}"
           npm ci
+          if [ "$GITHUB_REF_NAME" = staging ]; then echo $STAGING_ENV_FILE | base64 --decode > .env.local; fi
+          if [ "$GITHUB_REF_NAME" = prod ]; then echo $PROD_ENV_FILE | base64 --decode > .env.local; fi
           npm run build
+        env:
+          STAGING_ENV_FILE: ${{secrets.STAGING_ENV_FILE}}
       
       - name: Upload Next build          # Upload the artifact
         uses: actions/upload-artifact@v2
