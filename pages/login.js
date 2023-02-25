@@ -139,7 +139,7 @@ const Login = () => {
             Login
           </h1>
           <button
-            className="bg-transparent font-figtree border-2 border-[#2A2B2A] text-[#AB4DF7] rounded-3xl w-80 h-10 md:mt-4 mb-6"
+            className="bg-transparent font-figtree border-2 border-[#2A2B2A] text-[#AB4DF7] rounded-3xl w-80 h-10 md:mt-4 mb-2"
             onClick={() => handleProviderLogin("apple")}
           >
             Continue with Apple
