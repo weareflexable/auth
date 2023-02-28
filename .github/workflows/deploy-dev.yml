@@ -92,4 +92,4 @@ jobs:
             podman pull ghcr.io/weareflexable/auth:main
             podman stop auth
             podman rm auth
-            podman run --name="auth" -p 9082:3000 -d ghcr.io/weareflexable/auth:main
+            podman run --name="auth" -p 9080:3000 -d ghcr.io/weareflexable/auth:main
