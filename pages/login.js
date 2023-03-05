@@ -20,8 +20,12 @@ const Login = () => {
 
   // todo: functions
   const handleSignIn = async (e) => {
-    localStorage.setItem("redirect_to", redirect_to);
     e.preventDefault();
+    localStorage.setItem("redirect_to", redirect_to);
+    if(router.query.payment){
+      localStorage.setItem("payment",router.query.payment)
+    }
+    
     if (!email || !password) {
       toast.error("One or more fields are missing");
       return;
@@ -59,6 +63,9 @@ const Login = () => {
 
   function handleRegister() {
     localStorage.setItem("redirect_to", redirect_to);
+    if(router.query.payment){
+      localStorage.setItem("payment",router.query.payment)
+    }
     router.push("/register");
   }
 

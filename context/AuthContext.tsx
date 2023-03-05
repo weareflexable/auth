@@ -49,10 +49,10 @@ const AuthContextProvider = ({children}:AuthContextProviderProps)=>{
           updateSupabaseCookie(event, session);
           if (event === "SIGNED_IN") {
             setIsAuthenticated(true);
-            // getPaseto(supabase.auth.session().access_token).then(res=>{
-            //   setPlatformPaseto(res)
-            //   router.push('/dashboard') 
-            // }); 
+            getPaseto(supabase.auth.session().access_token).then(res=>{
+              setPlatformPaseto(res)
+              router.push('/dashboard')  
+            }); 
           }
           if (event === "SIGNED_OUT") {
             setIsAuthenticated(false); 
