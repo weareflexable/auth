@@ -44,6 +44,10 @@ const Login = () => {
 
   const handleProviderLogin = async (provider) => {
     localStorage.setItem("redirect_to", redirect_to);
+    if(router.query.payment){
+      localStorage.setItem("payment",router.query.payment)
+    }
+
     setIsSubmitting(true);
     // this redirects whenever it's succesful
     setIsSubmitting(true);
