@@ -15,10 +15,10 @@ export default function Redirect() {
         const paymentStatus = localStorage.getItem('payment');
         const paseto = localStorage.getItem('PLATFORM_PASETO')
 
-        const marketplaceReturnUrl = paymentStatus ? `http://localhost:3001?paseto=${paseto}&payment=pending` : `http://localhost:3001?paseto=${paseto}`
+        const marketplaceReturnUrl = paymentStatus ? `${process.env.NEXT_PUBLIC_MARKETPLACE}?paseto=${paseto}&payment=pending` : `${process.env.NEXT_PUBLIC_MARKETPLACE}?paseto=${paseto}`
 
-        // const redirectUrl = redirectTo === 'portal' ? `${process.env.NEXT_PUBLIC_PORTAL}?paseto=${paseto}` : `${process.env.NEXT_PUBLIC_MARKETPLACE}?paseto=${paseto}`
-        const redirectUrl = redirectTo === 'portal'?`http://localhost:3000/login?paseto=${paseto}`: marketplaceReturnUrl
+        const redirectUrl = redirectTo === 'portal' ? `${process.env.NEXT_PUBLIC_PORTAL}?paseto=${paseto}` : marketplaceReturnUrl
+        // const redirectUrl = redirectTo === 'portal'?`http://localhost:3000/login?paseto=${paseto}`: marketplaceReturnUrl
         setTimeout(() => {
             router.replace(redirectUrl)
             setIsRedirecting(false)
