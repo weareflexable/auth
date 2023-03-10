@@ -11,6 +11,6 @@ export interface PostAuthPayload {
 
 export interface PostAuthRequest {
     token: string
-    device_type: string
+    deviceType: string
     provider: string
 }
