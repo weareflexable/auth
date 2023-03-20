@@ -15,14 +15,14 @@ const Dashboard = () => {
   const { isAuthenticated, paseto } = useAuthContext();
 
   // TODO: remove this component
-  if (!paseto) {
-    return (
-    <div className="text-white flex flex-col items-center text-center">
-      <h1 className="text-5xl font-bold font-figtree">Redirecting...</h1>
-      <span className="mt-4 w-[50%]">You&nbsp;re being redirected to another page. It may take a while so sit tight and stay flexable!</span>
-    </div>
-  )
-  }
+  // if (!paseto) {
+  //   return (
+  //   <div className="text-white flex flex-col items-center text-center">
+  //     <h1 className="text-5xl font-bold font-figtree">Redirecting...</h1>
+  //     <span className="mt-4 w-[50%]">You&nbsp;re being redirected to another page. It may take a while so sit tight and stay flexable!</span>
+  //   </div>
+  // )
+  // }
 
   // component
   return (

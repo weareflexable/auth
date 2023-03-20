@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import React,{useState,useContext,createContext, ReactNode, useEffect} from 'react';
+import React,{useState,useContext,createContext, ReactNode, useEffect, useRef} from 'react';
 import { getPaseto } from '../src/api/platform';
 import { getPlatformPaseto, setPlatformPaseto } from '../src/storage';
 import {checkUser} from '../utils/auth'
@@ -22,13 +22,15 @@ const AuthContextProvider = ({children}:AuthContextProviderProps)=>{
     const router = useRouter();
     const [isAuthenticated, setIsAuthenticated] = useState(false)
     const [paseto, setPaseto] = useState(null)
+    const eventRef = useRef(null)
+
   
     
     useEffect(() => {
       // console.log(supabase.auth.session().access_token)
       if (isAuthenticated && !getPlatformPaseto()) {
         // supabase.auth.signOut()
-        console.log('session',supabase.auth.session())
+        // console.log('session',supabase.auth.session())
         getPaseto(supabase.auth.session().access_token).then(paseto=>{
             setPaseto(paseto)
             setPlatformPaseto(paseto)
@@ -39,26 +41,41 @@ const AuthContextProvider = ({children}:AuthContextProviderProps)=>{
     
     useEffect(() => {
       // checks if user already signed in when they land
-      const user = checkUser();
-      if (user) {
-        setIsAuthenticated(true);
-      }
+      // const user = checkUser();
+      // if (user) {
+      //   setIsAuthenticated(true);
+      // }
       
+      let pushingTimeout;
       const { data: authListener } = supabase.auth.onAuthStateChange(
         (event, session) => {
-          updateSupabaseCookie(event, session);
+          // updateSupabaseCookie(event, session);
+
+
+          if(event === "PASSWORD_RECOVERY"){
+            // eventRef.current = 'recovery'
+            console.log(eventRef.current)
+            // clearTimeout(pushingTimeout)
+            router.push('update-password')
+            
+          }
           if (event === "SIGNED_IN") {
+
             setIsAuthenticated(true);
             
-            getPaseto(supabase.auth.session().access_token).then(res=>{
+            
+            eventRef.current = 'recovery'
+            
+            getPaseto(session.access_token).then(res=>{
               setPlatformPaseto(res)
-             
-              router.push('/dashboard')  
+              pushingTimeout = setTimeout(()=>{
+                console.log('signedIn')
+               eventRef.current === 'recovery'?null:router.push('/dashboard')  
+             },3000)
             }); 
           }
-          if(event === "PASSWORD_RECOVERY"){
-            router.push('/update-password')
-          }
+        
+         
           if (event === "SIGNED_OUT") {
             setIsAuthenticated(false); 
             localStorage.clear()
@@ -67,6 +84,7 @@ const AuthContextProvider = ({children}:AuthContextProviderProps)=>{
         );
         
         return () => {
+          clearTimeout(pushingTimeout)
           authListener?.unsubscribe();
         };
       }, [router]); // try removing deps
