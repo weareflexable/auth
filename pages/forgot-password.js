@@ -26,7 +26,7 @@ const ForgotPassword = () => {
     } else {
       setIsSubmitting(false);
       toast.success("Check your email inbox");
-      router.push("/");
+      // router.push("/");
     }
   };
 
