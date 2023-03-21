@@ -42,10 +42,10 @@ const ForgotPassword = () => {
   }
   
   const recoveryForm = (
-<Box w='100%'  maxW='500px' mx='4 auto'> 
+      <Box w='100%'  maxW='500px' mx='4 auto'> 
         <Flex mx='4' mt='5' justifyContent={'flex-start'} mb='5'>
           {/* <h1 className="text-5xl font-figtree text-white">Forgot Password</h1> */}
-          <Text color={'text.200'} textStyle='h3'>Recover Password</Text>
+          <Text color={'text.300'} textStyle='h3'>Recover Password</Text>
         </Flex>
 
         <Box borderRadius='4px' p={4} w='100%'>
@@ -58,7 +58,7 @@ const ForgotPassword = () => {
           <Field name='email' validate={validateEmail}>
             {({ field, form }) => (
                 <FormControl bg={'#121212'} isRequired style={{marginBottom:'.8rem'}} isInvalid={form.errors.email && form.touched.email}>
-                <Input type='email' bg={'#121212'} color='text.300' borderWidth='2px' size='lg' borderColor={'#464646'}  variant={'outline'} {...field} placeholder='email' />
+                <Input type='email' bg={'#121212'} textStyle={'secondary'} color='text.300' borderWidth='2px' size='lg' borderColor={'#464646'}  variant={'outline'} {...field} placeholder='Email' />
                 <FormErrorMessage>{form.errors.email}</FormErrorMessage>
                </FormControl> 
             )} 
@@ -111,7 +111,7 @@ const ForgotPassword = () => {
       </AlertTitle> 
       <AlertDescription maxWidth='sm'>
         <Text color={'text.200'} textStyle='secondary'>
-          Your password recovery link has been sent to your email. Please follow the link in your email and update your password.
+          Your password recovery link has been sent to your email. Please follow the link in your email and update your password
           </Text>
       </AlertDescription>
 </Alert>

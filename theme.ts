@@ -169,14 +169,14 @@ const config: ThemeConfig ={
     },
 
     h2:{
-      fontWeight: '700',
+      fontWeight: '650',
       fontFamily: 'body',
       fontSize: '1em',
       letterSpacing: '-0.1px'
     },
 
     h3:{
-      fontWeight: '700',
+      fontWeight: '650',
       fontFamily: 'body',
       fontSize: '1.7em',
       letterSpacing: '-0.1px',

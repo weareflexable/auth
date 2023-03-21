@@ -3,11 +3,14 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import { toast } from "react-toastify";
 import { updatePassword } from "../utils/auth";
+import {Flex, Text, Alert, FormHelperText, FormLabel, AlertDescription, AlertTitle, AlertIcon, Box,FormControl, Input, FormErrorMessage, InputGroup, Button, InputRightElement} from '@chakra-ui/react'
+import {Formik, Form, Field} from 'formik'
 
 const UpdatePassword = () => {
   const [password, setPassword] = useState("");
   const [retypedPassword, setRetypedPassword] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false)
 
   const router = useRouter();
   // todo: functions
@@ -31,72 +34,115 @@ const UpdatePassword = () => {
     } else {
       setPassword("");
       setRetypedPassword("");
-      toast.dark("Password updated successfully");
-      router.push("/login");
+      // toast.dark("Password updated successfully");
+      // router.push("/login");
     }
   };
+
+  function validatePassword(value){
+    let error;
+    if( value.length < 8){
+      error = 'Password must me 8 characters or more'
+    }
+    return error
+  }
+
+  const updatePasswordForm = (
+    <Box w='100%'  maxW='500px' mx='4 auto'> 
+            <Flex mx='4' mt='5' justifyContent={'flex-start'} mb='5'>
+              {/* <h1 className="text-5xl font-figtree text-white">Forgot Password</h1> */}
+              <Text color={'text.300'} textStyle='h3'>Update Password</Text>
+            </Flex>
+    
+            <Box borderRadius='4px' p={4} w='100%'>
+              <Formik
+                initialValues={{ email: ' ', password: '' }}
+                onSubmit={(values) => handleUpdate(values) }
+              >
+            {(props) => (
+            <Form style={{width:'100%'}}>
+              <Field name='password' validate={validatePassword}>
+                {({ field, form }) => (
+                    <FormControl bg={'#121212'}  isRequired style={{marginBottom:'1rem'}} isInvalid={form.errors.password && form.touched.password}>
+                    <Flex justifyContent={'space-between'}>
+                      <FormLabel color={'text.300'}>Password</FormLabel>
+                      {!form.errors.password && form.values.password !== ''?<Text color='green.300'>{'✓'}</Text>:null}
+                    </Flex>
+                    <Input focusBorderColor={ props.touched.password && form.errors.password ? 'red.300':'green.400'} textStyle={'secondary'} type='password' bg={'#121212'} color='text.300' borderWidth='2px' size='lg' borderColor={'#464646'}  variant={'outline'} {...field} placeholder='Password' />
+                   { form.errors.password? <FormErrorMessage>{form.errors.password}</FormErrorMessage>: <FormHelperText color={'text.300'}>
+                      Password should be a minimum of 8 characters
+                    </FormHelperText>}
+                   </FormControl> 
+                )} 
+              </Field>
+              <Field name='confirmPassword' validate={()=>{}}>
+                {({ field, form }) => (
+                    <FormControl bg={'#121212'} isRequired style={{marginBottom:'.8rem'}} isInvalid={form.touched.confirmPassword && props.values.password !== props.values.confirmPassword}>
+                    <Flex justifyContent={'space-between'}>
+                      <FormLabel color={'text.300'}>Confirm Password</FormLabel>
+                      {form.touched.confirmPassword && props.values.password !== '' && props.values.password === props.values.confirmPassword ?<Text color='green.300'>{'✓'}</Text>:null}
+                    </Flex>
+                    <Input disabled={props.values.password === ''} focusBorderColor={form.touched.confirmPassword && props.values.password !== props.values.confirmPassword ? 'red.300':'green.400'} textStyle={'secondary'} type='password' bg={'#121212'} color='text.300' borderWidth='2px' size='lg' borderColor={'#464646'}  variant={'outline'} {...field} placeholder='Confirm password' />
+                    {form.touched.confirmPassword && props.values.password !== props.values.confirmPassword ? <FormErrorMessage >Password and confirm password fields have to be the same</FormErrorMessage>:null}
+                   </FormControl> 
+                )} 
+              </Field>
+              <Button
+                mt={4}
+                isDisabled={props.values.password !== props.values.confirmPassword}
+                isLoading={isSubmitting}
+                w={'100%'}
+                colorScheme='brand'
+                size='lg'
+                type="submit"
+              >
+                Update Password
+              </Button>
+            </Form>
+          )}
+            </Formik>
+    
+            </Box>
+          </Box>
+      )
+
+      const successAlert = (
+        <Box w='100%' px='4' maxW='500px'>
+        <Alert
+          w={'100%'}
+          borderRadius='4px'
+          status='success'
+          variant='subtle'
+          bg={'#9ae6b429'}
+          flexDirection='column'
+          alignItems='center'
+          justifyContent='center'
+          textAlign='center'
+          height='200px'
+        >
+          <AlertIcon boxSize='40px' mr={0} />
+          <AlertTitle mt={4} mb={2} fontSize='lg'>
+            <Text color='text.300' textStyle={'h4'}>Password Reset Successful!</Text>
+          </AlertTitle> 
+          <AlertDescription maxWidth='sm'>
+            <Text color={'text.200'} textStyle='secondary'>
+              Your password has been successfully changed. Go back to login page and try out your new password
+              </Text>
+          </AlertDescription>
+    </Alert>
+    </Box>
+      )
   // todo: component
   return (
-    <div className="bg-black min-h-screen flex items-start justify-center">
+    <Flex justifyContent={'center'} align='center' bg='#121212' h={'100%'} minH='100vh'>
       <Head>
         <title>Flexable | Update Password</title>
         <meta name="description" content="Generated by create next app" />
         <link rel="icon" href="/logos/logo_colored.png" />
       </Head>
 
-      <div className="w-full max-w-sm">
-        <div className="flex justify-center items-center mt-8 mb-20">
-          <h1 className="text-5xl font-figtree text-white">Forgot Password</h1>
-        </div>
-
-        <form
-          onSubmit={handleUpdate}
-          className="bg-[#242525] shadow-md rounded px-8 pt-6 pb-8 mb-4"
-        >
-          <div className="mb-4">
-            <label
-              className="block text-gray-400 font-figtree text-sm font-bold mb-2"
-              for="password"
-            >
-              Password
-            </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="password"
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-          <div className="mb-4">
-            <label
-              className="block text-gray-400 font-figtree text-sm font-bold mb-2"
-              for="password"
-            >
-              Confirm Password
-            </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="confirm-password"
-              type="password"
-              placeholder="Confirm Password"
-              value={retypedPassword}
-              onChange={(e) => setRetypedPassword(e.target.value)}
-            />
-          </div>
-          <div className="flex items-center justify-between">
-            <button
-              className="bg-[#AB4DF7] text-black hover:bg-transparent border-2 hover:text-white border-[#AB4DF7] font-bold py-2 px-4 rounded-3xl focus:outline-none focus:shadow-outline"
-              type="submit"
-              disabled={isSubmitting}
-            >
-              Update
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
+    {showSuccessAlert? successAlert: updatePasswordForm}
+    </Flex>
   );
 };
 
