@@ -9,6 +9,7 @@ import { signIn, signInWithProvider } from "../utils/auth";
 import { getPlatformPaseto, setPlatformPaseto } from "../src/storage";
 import { getPaseto } from "../src/api/platform";
 import supabase from "../utils/supabaseClient";
+import { Button, Input } from "@chakra-ui/react";
 
 const Login = () => {
   // todo: states
@@ -162,29 +163,35 @@ const Login = () => {
             Continue with Google
           </button>
           <span className="font-figtree font-bold text-[#6E6E6F] mb-8">OR</span>
+          
           <form onSubmit={handleSignIn}>
-            <input
-              className="form-input rounded-sm shadow-sm mb-4 w-[95%] md:w-full pl-2 h-12 bg-transparent border-2 text-[#6E6E6F] font-figtree border-[#2A2B2A] "
+            <Input
+              variant='outlined'
+              mb='1rem'
               type="email"
-              id="email"
+              // id="email"
               placeholder="Email"
               value={email}
               onChange={(event) => setEmail(event.target.value)}
             />
-            <input
-              className="form-input rounded-sm shadow-sm w-[95%] md:w-full pl-2 h-12 bg-transparent border-2 text-[#6E6E6F] font-figtree border-[#2A2B2A]"
+            <Input 
+              variant='outline'
+              // className="form-input rounded-sm shadow-sm w-[95%] md:w-full pl-2 h-12 bg-transparent border-2 text-[#6E6E6F] font-figtree border-[#2A2B2A]"
               type="password"
-              id="password"
-              placeholder="Password"
-              value={password}
+              // id="password"
+              // placeholder="Password"
+              // value={password}
               onChange={(event) => setPassword(event.target.value)}
             />
-            <button
-              className="btn btn-primary mt-8 bg-[#AB4DF7] font-figtree font-semibold w-[95%] md:w-full h-10 rounded-3xl"
+            <Button
+              w={'100%'}
+              borderRadius='50px'
+              mt='1.5rem'
+              // className="btn btn-primary mt-8 bg-[#AB4DF7] font-figtree font-semibold w-[95%] md:w-full h-10 rounded-3xl"
               type="submit"
             >
               Login
-            </button>
+            </Button>
             <div className="flex mt-2 justify-center">
               <p className="font-figtree text-white">No account?</p>
 

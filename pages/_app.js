@@ -3,6 +3,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { AuthContextProvider } from "../context/AuthContext";
 import Head from "next/head";
+import {ChakraProvider} from '@chakra-ui/react'
+import theme from '../theme'
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -13,9 +15,11 @@ function MyApp({ Component, pageProps }) {
         <link rel="icon" href="/logos/logo_colored.png" />
       </Head>
       <div className="h-[92vh]">
-        <AuthContextProvider>
-          <Component {...pageProps} />
-        </AuthContextProvider>
+        <ChakraProvider theme={theme}>
+          <AuthContextProvider>
+            <Component {...pageProps} />
+          </AuthContextProvider>
+        </ChakraProvider>
         <ToastContainer
           position="bottom-center"
           autoClose={5000}
