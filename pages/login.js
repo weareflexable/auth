@@ -3,12 +3,11 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Head from "next/head";
-import { toast } from "react-toastify";
 import { signIn, signInWithProvider } from "../utils/auth";
 import { getPlatformPaseto, setPlatformPaseto } from "../src/storage";
 import { getPaseto } from "../src/api/platform";
 import supabase from "../utils/supabaseClient";
-import { Button, Input, HStack, Divider, Box, InputRightElement, InputGroup, Flex, Text, FormControl, FormLabel, FormErrorMessage, propNames} from "@chakra-ui/react";
+import { Button, Input, HStack, Divider, Box, useToast, InputRightElement, InputGroup, Flex, Text, FormControl, FormLabel, FormErrorMessage, propNames} from "@chakra-ui/react";
 import {Form, Formik, Field} from 'formik'
 
 const Login = () => {
@@ -19,6 +18,7 @@ const Login = () => {
   const router = useRouter();
   const emailRef = useRef(null)
   const { redirect_to } = router.query;
+  const toast = useToast()
 
   useEffect(() => {
     emailRef.current.focus()
@@ -37,16 +37,25 @@ const Login = () => {
    
     setIsSubmitting(true); 
     const { error, session } = await signIn({ email, password });
-    console.log("login session", session);
     if (error) {
       setIsSubmitting(false);
-      toast.error(error.message);
+      toast({
+        title: `${error}`,
+        variant: 'error',
+        position:'top-right',
+        isClosable: true,
+      })
     }
     if (session) {
       setIsSubmitting(false);
       // getPaseto(supabase.auth.session().access_token).then(setPlatformPaseto);
       // const paseto = getPlatformPaseto();
-      toast.success("Logged in successfully");
+      toast({
+        title: `Login successful!`,
+        variant: 'success',
+        position:'top-right',
+        isClosable: true,
+      })
       router.push(`/dashboard`);
     }
   };
@@ -218,7 +227,7 @@ const Login = () => {
           <Field name='email' validate={validateEmail}>
             {({ field, form }) => (
                 <FormControl bg={'#121212'} isRequired style={{marginBottom:'.8rem'}} isInvalid={form.errors.email && form.touched.email}>
-                <Input autoComplete='off' ref={emailRef}  type='string' textStyle={'secondary'} color='text.300' borderWidth='2px' size='lg' borderColor={'#464646'}  variant={'outline'} {...field} placeholder='Email' />
+                <Input autoComplete='off' ref={emailRef}  type='email' textStyle={'secondary'} color='text.300' borderWidth='2px' size='lg' borderColor={'#464646'}  variant={'outline'} {...field} placeholder='Email' />
                 <FormErrorMessage>{form.errors.email}</FormErrorMessage>
                </FormControl> 
             )} 
