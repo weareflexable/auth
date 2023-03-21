@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import React,{useState,useContext,createContext, ReactNode, useEffect, useRef} from 'react';
+import { clearTimeout } from 'timers';
 import { getPaseto } from '../src/api/platform';
 import { getPlatformPaseto, setPlatformPaseto } from '../src/storage';
 import {checkUser} from '../utils/auth'
@@ -52,25 +53,30 @@ const AuthContextProvider = ({children}:AuthContextProviderProps)=>{
           // updateSupabaseCookie(event, session);
 
 
-          if(event === "PASSWORD_RECOVERY"){
-            // eventRef.current = 'recovery'
-            console.log(eventRef.current)
-            // clearTimeout(pushingTimeout)
-            router.push('update-password')
+          // if(event === "PASSWORD_RECOVERY"){
+          //   // eventRef.current = 'recovery'
+          //   console.log(eventRef.current)
+          //   // clearTimeout(pushingTimeout)
+          //   router.push('update-password')
             
-          }
-          if (event === "SIGNED_IN") {
+          // }
+          if (event === "SIGNED_IN" || event === 'PASSWORD_RECOVERY') {
 
             setIsAuthenticated(true);
             
-            
-            eventRef.current = 'recovery'
+            if(event === 'PASSWORD_RECOVERY'){
+              eventRef.current = 'recovery'
+              console.log(eventRef)
+              router.push('update-password')
+              clearTimeout(pushingTimeout)
+              return
+            }
             
             getPaseto(session.access_token).then(res=>{
               setPlatformPaseto(res)
               pushingTimeout = setTimeout(()=>{
                 console.log('signedIn')
-               eventRef.current === 'recovery'?null:router.push('/dashboard')  
+               eventRef.current === 'recovery'? null:router.push('/dashboard')  
              },3000)
             }); 
           }
@@ -84,7 +90,7 @@ const AuthContextProvider = ({children}:AuthContextProviderProps)=>{
         );
         
         return () => {
-          clearTimeout(pushingTimeout)
+          // clearTimeout(pushingTimeout)
           authListener?.unsubscribe();
         };
       }, [router]); // try removing deps

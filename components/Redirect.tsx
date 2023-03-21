@@ -20,7 +20,7 @@ export default function Redirect() {
         const redirectUrl = redirectTo === 'portal' ? `${process.env.NEXT_PUBLIC_PORTAL}?paseto=${paseto}` : marketplaceReturnUrl
         // const redirectUrl = redirectTo === 'portal'?`http://localhost:3000/login?paseto=${paseto}`: marketplaceReturnUrl
         setTimeout(() => {
-            // router.replace(redirectUrl)
+            router.replace(redirectUrl)
             setIsRedirecting(false)
             // clear storage
             // localStorage.clear()
