@@ -38,13 +38,14 @@ const Login = () => {
     setIsSubmitting(true); 
     const { error, session } = await signIn({ email, password });
     if (error) {
+      console.log(error)
       setIsSubmitting(false);
       toast({
-        title: `${error}`,
-        variant: 'error',
+        title: `${error.message}`, 
+        status: 'error',
         position:'top-right',
         isClosable: true,
-      })
+      }) 
     }
     if (session) {
       setIsSubmitting(false);
@@ -52,7 +53,7 @@ const Login = () => {
       // const paseto = getPlatformPaseto();
       toast({
         title: `Login successful!`,
-        variant: 'success',
+        status: 'success',
         position:'top-right',
         isClosable: true,
       })

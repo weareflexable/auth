@@ -37,7 +37,7 @@ const Register = () => {
     if (error) {
       toast({
         title: `${error.message}`,
-        variant: 'error',
+        status: 'error',
         position:'top-right',
         isClosable: true,
       })

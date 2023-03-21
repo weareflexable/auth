@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import { createRecovery } from "../utils/auth";
-import {Flex, Text, Alert, AlertDescription, AlertTitle, AlertIcon, Box,FormControl, Input, FormErrorMessage, InputGroup, Button, InputRightElement} from '@chakra-ui/react'
+import {Flex, Text, Alert, AlertDescription, FormLabel, AlertTitle, AlertIcon, Box,FormControl, Input, FormErrorMessage, InputGroup, Button, InputRightElement} from '@chakra-ui/react'
 import {Formik, Form, Field} from 'formik'
 
 const ForgotPassword = () => {
@@ -13,6 +13,12 @@ const ForgotPassword = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccessAlert, setShowSuccessAlert] = useState(false)
   const router = useRouter();
+
+  const emailRef = useRef(null)
+
+  useEffect(() => {
+    emailRef.current.focus()
+  }, [])
 
   // todo: functions
   const handleSignIn = async (values) => {
@@ -58,7 +64,8 @@ const ForgotPassword = () => {
           <Field name='email' validate={validateEmail}>
             {({ field, form }) => (
                 <FormControl bg={'#121212'} isRequired style={{marginBottom:'.8rem'}} isInvalid={form.errors.email && form.touched.email}>
-                <Input type='email' bg={'#121212'} textStyle={'secondary'} color='text.300' borderWidth='2px' size='lg' borderColor={'#464646'}  variant={'outline'} {...field} placeholder='Email' />
+                <FormLabel color={'text.300'}>Email</FormLabel>
+                <Input type='email' bg={'#121212'} ref={emailRef} textStyle={'secondary'} color='text.300' borderWidth='2px' size='lg' borderColor={'#464646'}  variant={'outline'} {...field} placeholder='Email' />
                 <FormErrorMessage>{form.errors.email}</FormErrorMessage>
                </FormControl> 
             )} 
@@ -66,7 +73,7 @@ const ForgotPassword = () => {
           <Button
             mt={4}
             // colorScheme='teal'
-            isLoading={isSubmitting}
+            isLoading={isSubmitting} 
             w={'100%'}
             colorScheme='brand'
             size='lg'
