@@ -18,12 +18,12 @@ const config: ThemeConfig ={
     components:{
       Input:{
         defaultProps:{
-          focusBorderColor:'brand.200'
+          focusBorderColor:'brand.100'
         }
       },
       Select:{
          defaultProps:{
-          focusBorderColor:'brand.200'
+          focusBorderColor:'brand.100'
         }
       },
       Button:{
@@ -33,20 +33,20 @@ const config: ThemeConfig ={
         variants:{
           outline:{
             color:'brand.300',
-            fontWeight: 650,
+            fontWeight: 600,
             borderColor:'#333333',
             backgroundColor:'transparent',
             borderRadius: '50px',
             borderWidth:'2px'
           },
           ghost:{
-            fontWeight:650,
+            fontWeight:600,
             color:'text.200',
             backgroundColor:'#464646',
             borderRadius: '50px'
           },
           link:{
-            fontWeight:650,
+            fontWeight:600,
             color: 'brand.200'
           },
           solid:{

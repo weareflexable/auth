@@ -251,7 +251,7 @@ const Login = () => {
 
          <Flex w={'100%'} justifyContent='space-between'>
             <Flex my='4'>
-              <Text mr='1'>No account? </Text>
+              <Text color='text.200' mr='1'>No account? </Text>
               <Button variant={'link'} onClick={handleRegister}>
                  Sign up
               </Button>
