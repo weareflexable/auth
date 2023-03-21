@@ -1,6 +1,4 @@
 import "../styles/globals.css";
-import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer } from "react-toastify";
 import { AuthContextProvider } from "../context/AuthContext";
 import Head from "next/head";
 import {ChakraProvider} from '@chakra-ui/react'
@@ -20,15 +18,6 @@ function MyApp({ Component, pageProps }) {
             <Component {...pageProps} />
           </AuthContextProvider>
         </ChakraProvider>
-        <ToastContainer
-          position="bottom-center"
-          autoClose={5000}
-          hideProgressBar={false}
-          closeOnClick={true}
-          pauseOnHover={true}
-          draggable={true}
-          dark
-        />
       </div>
     </>
   );

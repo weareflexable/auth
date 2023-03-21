@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import Head from "next/head";
 import Link from "next/link";
-import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import { createRecovery } from "../utils/auth";
-import {Flex, Text, Alert, AlertDescription, FormLabel, AlertTitle, AlertIcon, Box,FormControl, Input, FormErrorMessage, InputGroup, Button, InputRightElement} from '@chakra-ui/react'
+import {Flex, Text, Alert, AlertDescription, FormLabel, useToast, AlertTitle, AlertIcon, Box,FormControl, Input, FormErrorMessage, InputGroup, Button, InputRightElement} from '@chakra-ui/react'
 import {Formik, Form, Field} from 'formik'
 
 const ForgotPassword = () => {
@@ -13,6 +12,8 @@ const ForgotPassword = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccessAlert, setShowSuccessAlert] = useState(false)
   const router = useRouter();
+
+  const toast = useToast()
 
   const emailRef = useRef(null)
 
@@ -28,7 +29,12 @@ const ForgotPassword = () => {
     const { error } = await createRecovery(email);
     if (error) {
       setIsSubmitting(false);
-      toast.error(error.message);
+      toast({
+        title: `${error.message}`,
+        status: 'error',
+        position:'top-right',
+        isClosable: true,
+      })
     } else {
       setIsSubmitting(false);
       setShowSuccessAlert(true)

@@ -1,17 +1,17 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
-import { toast } from "react-toastify";
 import { updatePassword } from "../utils/auth";
-import {Flex, Text, Alert, FormHelperText, FormLabel, AlertDescription, AlertTitle, AlertIcon, Box,FormControl, Input, FormErrorMessage, InputGroup, Button, InputRightElement} from '@chakra-ui/react'
+import {Flex, Text, Alert, FormHelperText, useToast, FormLabel, AlertDescription, AlertTitle, AlertIcon, Box,FormControl, Input, FormErrorMessage, InputGroup, Button, InputRightElement} from '@chakra-ui/react'
 import {Formik, Form, Field} from 'formik'
 
 const UpdatePassword = () => {
   const [password, setPassword] = useState("");
-  const [retypedPassword, setRetypedPassword] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [showSuccessAlert, setShowSuccessAlert] = useState(false)
+  const [showSuccessAlert, setShowSuccessAlert] = useState(true)
   const passwordRef = useRef(null)
+
+  const toast = useToast()
 
   const [show, setShow] = React.useState(false)
   const [showConfirm, setShowConfirm] = useState(false)
@@ -20,26 +20,19 @@ const UpdatePassword = () => {
   const router = useRouter();
   // todo: functions
   const handleUpdate = async (e) => {
-    e.preventDefault();
-    if (!password || !retypedPassword) {
-      return toast.error("please fill all the fields");
-    }
-    // if password is too short
-    if (password.toString().length < 7) {
-      return toast.error("password must be at leas 7 chars");
-    }
-    // if passwords do not match
-    if (password !== retypedPassword) {
-      return toast.error("passwords do not match");
-    }
-
+    setIsSubmitting(true)
     const { error } = await updatePassword(password);
     if (error) {
-      toast.error(error.message);
+      setIsSubmitting(false)
+      toast({
+        title: `${error.message}`,
+        status: 'error',
+        position:'top-right',
+        isClosable: true,
+      })
     } else {
-      setPassword("");
-      setRetypedPassword("");
-      // toast.dark("Password updated successfully");
+      setIsSubmitting(false)
+      setShowSuccessAlert(true)
       // router.push("/login");
     }
   };
@@ -53,7 +46,9 @@ const UpdatePassword = () => {
   }
 
   useEffect(() => {
-    passwordRef.current.focus()
+    if(!showSuccessAlert){
+      passwordRef.current.focus()
+    }
   }, [])
 
   const updatePasswordForm = (
@@ -151,6 +146,7 @@ const UpdatePassword = () => {
             <Text color={'text.200'} textStyle='secondary'>
               Your password has been successfully changed. Go back to login page and try out your new password
               </Text>
+              <Button mt='3' variant={'link'} onClick={()=>router.push('/login')}>Goto Login</Button>
           </AlertDescription>
     </Alert>
     </Box>

@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { checkUser, signOut } from "../utils/auth";
-import { toast } from "react-toastify";
 import withAuth from "../components/AuthWrapper";
 import Link from "next/link";
 import supabase from "../utils/supabaseClient";
