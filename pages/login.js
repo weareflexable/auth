@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import { useState } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Head from "next/head";
@@ -9,7 +8,7 @@ import { signIn, signInWithProvider } from "../utils/auth";
 import { getPlatformPaseto, setPlatformPaseto } from "../src/storage";
 import { getPaseto } from "../src/api/platform";
 import supabase from "../utils/supabaseClient";
-import { Button, Input, HStack, Divider, Box, InputRightElement, InputGroup, Flex, Text, FormControl, FormLabel, FormErrorMessage} from "@chakra-ui/react";
+import { Button, Input, HStack, Divider, Box, InputRightElement, InputGroup, Flex, Text, FormControl, FormLabel, FormErrorMessage, propNames} from "@chakra-ui/react";
 import {Form, Formik, Field} from 'formik'
 
 const Login = () => {
@@ -18,7 +17,12 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
+  const emailRef = useRef(null)
   const { redirect_to } = router.query;
+
+  useEffect(() => {
+    emailRef.current.focus()
+  }, [])
 
   // todo: functions
   const handleSignIn = async (values) => {
@@ -82,7 +86,7 @@ const Login = () => {
     }
     return error
   }
-  function validateName(value) {
+  function validatePassword(value) {
     let error
     if (!value) {
       error = 'Password is required'
@@ -206,7 +210,7 @@ const Login = () => {
           {/* <form onSubmit={handleSignIn}> */}
           <Box maxW='450px' px='1rem' w='100%'>
           <Formik
-            initialValues={{ email: ' ', password: '' }}
+            initialValues={{ email: '', password: '' }}
             onSubmit={(values) => handleSignIn(values) }
           >
         {(props) => (
@@ -214,16 +218,20 @@ const Login = () => {
           <Field name='email' validate={validateEmail}>
             {({ field, form }) => (
                 <FormControl bg={'#121212'} isRequired style={{marginBottom:'.8rem'}} isInvalid={form.errors.email && form.touched.email}>
-                <Input autoComplete="false" type='email' bg={'#121212'} color='text.300' borderWidth='2px' size='lg' borderColor={'#464646'}  variant={'outline'} {...field} placeholder='email' />
+                <Input autoComplete='off' ref={emailRef}  type='string' textStyle={'secondary'} color='text.300' borderWidth='2px' size='lg' borderColor={'#464646'}  variant={'outline'} {...field} placeholder='Email' />
                 <FormErrorMessage>{form.errors.email}</FormErrorMessage>
                </FormControl> 
             )} 
           </Field>
-          <Field name='password' validate={validateName}>
+          <Field name='password' validate={validatePassword}>
             {({ field, form }) => (
-                <FormControl isRequired isInvalid={form.errors.password && form.touched.password}>
-                  <InputGroup bg={'#121212'} size='md'>
-                   <Input bg={'#121212'} size='lg' type={show ? 'text' : 'password'} color='text.300' borderWidth='2px' borderColor={'#464646'}  variant={'outline'} {...field} placeholder='password' />
+                <FormControl bg={'#121212'} isRequired isInvalid={form.errors.password && form.touched.password}>
+                  <Flex justifyContent={'space-between'}>
+                      <FormLabel color={'text.300'}>Password</FormLabel>
+                      {!form.errors.password && form.values.password !== ''?<Text color='green.300'>{'✓'}</Text>:null}
+                    </Flex>
+                  <InputGroup  size='md'>
+                   <Input  bg={'#121212'} textStyle={'secondary'} size='lg' type={show ? 'text' : 'password'} color='text.300' borderWidth='2px' borderColor={'#464646'}  variant={'outline'} {...field} placeholder='password' />
                    <InputRightElement display={'flex'} h='100%' alignItems='center' width='4.5rem'>
                       <Button h='1.75rem' variant='text' colorScheme='brand' size='sm' onClick={handleClick}>
                         {show ? 'Hide' : 'Show'} 
@@ -237,6 +245,7 @@ const Login = () => {
           <Button
             mt={4}
             // colorScheme='teal'
+            isDisabled = {props.errors.email || props.errors.password || props.values.email === '' || props.values.password === ''}
             isLoading={isSubmitting}
             w={'100%'}
             colorScheme='brand'
