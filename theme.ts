@@ -31,10 +31,13 @@ const config: ThemeConfig ={
           
         },
         variants:{
-          'flexable-combo':{
-            color:'white',
+          outline:{
+            color:'brand.300',
             fontWeight: 650,
-            backgroundColor:'transparent'
+            borderColor:'#333333',
+            backgroundColor:'transparent',
+            borderRadius: '50px',
+            borderWidth:'2px'
           },
           ghost:{
             fontWeight:650,
@@ -50,10 +53,10 @@ const config: ThemeConfig ={
             bg:'brand.300',
             borderRadius: '50px',
             color:'white',
-            _active:{
-              bg:'brand.100',
-              color:'black'
-            },
+            // _active:{
+            //   bg:'brand.100',
+            //   color:'black'
+            // },
           },
           accentSolid:{
             bg:'accent.300',
@@ -235,7 +238,7 @@ const config: ThemeConfig ={
       letterSpacing: '-.02px'
     },
     buttonLabel:{
-      fontWeight:'700',
+      fontWeight:'650',
       fontSize:['.9rem','1rem'],
       letterSpacing:'-.2',
       lineHeight:'1'
