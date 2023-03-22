@@ -16,12 +16,12 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
-  const emailRef = useRef(null)
+  // const emailRef = useRef(null)
   const { redirect_to } = router.query;
   const toast = useToast()
 
   useEffect(() => {
-    emailRef.current.focus()
+    // emailRef.current.focus()
   }, [])
 
   // todo: functions

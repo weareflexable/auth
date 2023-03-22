@@ -53,13 +53,7 @@ const AuthContextProvider = ({children}:AuthContextProviderProps)=>{
           // updateSupabaseCookie(event, session);
 
 
-          // if(event === "PASSWORD_RECOVERY"){
-          //   // eventRef.current = 'recovery'
-          //   console.log(eventRef.current)
-          //   // clearTimeout(pushingTimeout)
-          //   router.push('update-password')
-            
-          // }
+
           if (event === "SIGNED_IN" || event === 'PASSWORD_RECOVERY') {
 
             setIsAuthenticated(true);
