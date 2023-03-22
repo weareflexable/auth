@@ -228,7 +228,7 @@ const Login = () => {
           <Field name='email' validate={validateEmail}>
             {({ field, form }) => (
                 <FormControl bg={'#121212'} isRequired style={{marginBottom:'.8rem'}} isInvalid={form.errors.email && form.touched.email}>
-                <Input autoComplete='off' ref={emailRef}  type='email' textStyle={'secondary'} color='text.300' borderWidth='2px' size='lg' borderColor={'#464646'}  variant={'outline'} {...field} placeholder='Email' />
+                <Input    type='email' textStyle={'secondary'} color='text.300' borderWidth='2px' size='lg' borderColor={'#464646'}  variant={'outline'} {...field} placeholder='Email' />
                 <FormErrorMessage>{form.errors.email}</FormErrorMessage>
                </FormControl> 
             )} 
