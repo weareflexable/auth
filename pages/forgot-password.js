@@ -68,7 +68,7 @@ const ForgotPassword = () => {
         <Form style={{width:'100%'}}>
           <Field name='email' validate={validateEmail}>
             {({ field, form }) => (
-                <FormControl bg={'#121212'} isRequired style={{marginBottom:'.8rem'}} isInvalid={form.errors.email && form.touched.email}>
+                <FormControl bg={'#121212'} isRequired style={{marginBottom:'.8rem'}} isInvalid={props.errors.email && props.touched.email}>
                 <FormLabel color={'text.300'}>Email</FormLabel>
                 <Input type='email' bg={'#121212'} ref={emailRef} textStyle={'secondary'} color='text.300' size='lg' borderColor={'#464646'}  variant={'outline'} {...field} placeholder='Email' />
                 <FormErrorMessage>{form.errors.email}</FormErrorMessage>
@@ -98,7 +98,6 @@ const ForgotPassword = () => {
                  Sign in
               </Button>
             </Flex>
-            {/* <Button variant={'link'} onClick={()=>router.push('/forgot-password')}>Forgot password?</Button> */}
          </Flex>
         </Box>
       </Box>

@@ -98,12 +98,12 @@ const Register = () => {
   const signUpForm = (
   
         <Box w='100%'  maxW='500px' mx='4 auto'> 
-            <Flex mx='4' mt='5' justifyContent={'flex-start'} mb='5'>
+            <Flex mt='6' justifyContent={'flex-start'} mb='6'>
               {/* <h1 className="text-5xl font-figtree text-white">Forgot Password</h1> */}
               <Text color={'text.300'} textStyle='h3'>Sign Up</Text>
             </Flex>
           
-          <Box borderRadius='4px' p={4} w='100%'>
+          <Box borderRadius='4px'  w='100%'>
               <Formik
                 initialValues={{ email: ' ', password: '' }}
                 onSubmit={handleSignUp}
@@ -264,7 +264,7 @@ const Register = () => {
             </div>
           </div>
         </div>
-        <Flex w='100%' px='1rem' bg={'#121212'} h='100%' justifyContent='center' align={'center'} direction='column'>
+        <Flex w={['100%','100%', '100%', '50%']} px='1rem' bg={'#121212'} h='100%' justifyContent='center' align={'center'} direction='column'>
         {showSuccessAlert?successAlert: signUpForm}
         </Flex>
       </div>

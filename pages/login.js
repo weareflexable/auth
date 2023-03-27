@@ -187,7 +187,7 @@ const Login = () => {
           <h1 className="text-3xl font-figtree text-white font-semibold lg:mt-0 mb-8 mt-8">
             Login
           </h1>
-          <Flex maxW='500px' w='100%' px='1rem' direction='column'>
+          <Flex maxW='500px' w='100%' px={['1rem','0','0','0']} direction='column'>
 
           
           <Button
@@ -224,12 +224,12 @@ const Login = () => {
             onSubmit={(values) => handleSignIn(values) }
           >
         {(props) => (
-        <Form autoComplete="off" style={{width:'100%'}}>
+        <Form autoComplete="new-password" style={{width:'100%'}}>
           <Field name='email' validate={validateEmail}>
             {({ field, form }) => (
                 <FormControl isRequired style={{marginBottom:'.8rem'}} isInvalid={form.errors.email && form.touched.email}>
                 <FormLabel color={'text.300'}>Email</FormLabel>
-                <Input autoComplete="off"   textStyle={'secondary'} color='text.300'  size='lg' borderColor={'#464646'}  variant={'outline'} {...field} placeholder='Email' />
+                <Input type='email' textStyle={'secondary'} color='text.300'  size='lg' borderColor={'#464646'}  variant={'outline'} {...field} placeholder='Email' />
                 <FormErrorMessage>{form.errors.email}</FormErrorMessage>
                </FormControl> 
             )} 
@@ -242,7 +242,7 @@ const Login = () => {
                       {!form.errors.password && form.values.password !== ''?<Text color='green.300'>{'✓'}</Text>:null}
                     </Flex>
                   <InputGroup  size='md'>
-                   <Input autoComplete="off"  bg={'#121212'} textStyle={'secondary'} size='lg' type={show ? 'text' : 'password'} color='text.300'  borderColor={'#464646'}  variant={'outline'} {...field} placeholder='Password' />
+                   <Input autoComplete="new-password"  bg={'#121212'} textStyle={'secondary'} size='lg' type={show ? 'text' : 'password'} color='text.300'  borderColor={'#464646'}  variant={'outline'} {...field} placeholder='Password' />
                    <InputRightElement display={'flex'} h='100%' alignItems='center' width='4.5rem'>
                       <Button h='1.75rem' variant='text' colorScheme='brand' size='sm' onClick={handleClick}>
                         {show ? 'Hide' : 'Show'} 
