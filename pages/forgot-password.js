@@ -38,7 +38,6 @@ const ForgotPassword = () => {
     } else {
       setIsSubmitting(false);
       setShowSuccessAlert(true)
-      // router.push("/");
     }
   };
 
@@ -62,7 +61,7 @@ const ForgotPassword = () => {
 
         <Box borderRadius='4px' p={4} w='100%'>
           <Formik
-            initialValues={{ email: ' ', password: '' }}
+            initialValues={{ email: ' ' }}
             onSubmit={(values) => handleSignIn(values) }
           >
         {(props) => (
@@ -71,7 +70,7 @@ const ForgotPassword = () => {
             {({ field, form }) => (
                 <FormControl bg={'#121212'} isRequired style={{marginBottom:'.8rem'}} isInvalid={form.errors.email && form.touched.email}>
                 <FormLabel color={'text.300'}>Email</FormLabel>
-                <Input type='email' bg={'#121212'} ref={emailRef} textStyle={'secondary'} color='text.300' borderWidth='2px' size='lg' borderColor={'#464646'}  variant={'outline'} {...field} placeholder='Email' />
+                <Input type='email' bg={'#121212'} ref={emailRef} textStyle={'secondary'} color='text.300' size='lg' borderColor={'#464646'}  variant={'outline'} {...field} placeholder='Email' />
                 <FormErrorMessage>{form.errors.email}</FormErrorMessage>
                </FormControl> 
             )} 
@@ -80,6 +79,7 @@ const ForgotPassword = () => {
             mt={4}
             // colorScheme='teal'
             isLoading={isSubmitting} 
+            isDisabled = {props.values.email!=='' || props.errors.email}
             w={'100%'}
             colorScheme='brand'
             size='lg'

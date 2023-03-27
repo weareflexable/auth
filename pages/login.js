@@ -187,7 +187,7 @@ const Login = () => {
           <h1 className="text-3xl font-figtree text-white font-semibold lg:mt-0 mb-8 mt-8">
             Login
           </h1>
-          <Flex maxW='450px' w='100%' px='1rem' direction='column'>
+          <Flex maxW='500px' w='100%' px='1rem' direction='column'>
 
           
           <Button
@@ -218,31 +218,31 @@ const Login = () => {
           </HStack>
 
           {/* <form onSubmit={handleSignIn}> */}
-          <Box maxW='450px' px='1rem' w='100%'>
+          <Box maxW='500px' px='1rem' w='100%'>
           <Formik
             initialValues={{ email: '', password: '' }}
             onSubmit={(values) => handleSignIn(values) }
           >
         {(props) => (
-        <Form style={{width:'100%'}}>
+        <Form autoComplete="off" style={{width:'100%'}}>
           <Field name='email' validate={validateEmail}>
             {({ field, form }) => (
-                <FormControl bg={'#121212'} isRequired style={{marginBottom:'.8rem'}} isInvalid={form.errors.email && form.touched.email}>
+                <FormControl isRequired style={{marginBottom:'.8rem'}} isInvalid={form.errors.email && form.touched.email}>
                 <FormLabel color={'text.300'}>Email</FormLabel>
-                <Input    type='email' textStyle={'secondary'} color='text.300'  size='lg' borderColor={'#464646'}  variant={'outline'} {...field} placeholder='Email' />
+                <Input autoComplete="off"   textStyle={'secondary'} color='text.300'  size='lg' borderColor={'#464646'}  variant={'outline'} {...field} placeholder='Email' />
                 <FormErrorMessage>{form.errors.email}</FormErrorMessage>
                </FormControl> 
             )} 
           </Field>
           <Field name='password' validate={validatePassword}>
             {({ field, form }) => (
-                <FormControl bg={'#121212'} isRequired isInvalid={form.errors.password && form.touched.password}>
+                <FormControl isRequired isInvalid={form.errors.password && form.touched.password}>
                   <Flex justifyContent={'space-between'}>
                       <FormLabel color={'text.300'}>Password</FormLabel>
                       {!form.errors.password && form.values.password !== ''?<Text color='green.300'>{'✓'}</Text>:null}
                     </Flex>
                   <InputGroup  size='md'>
-                   <Input  bg={'#121212'} textStyle={'secondary'} size='lg' type={show ? 'text' : 'password'} color='text.300'  borderColor={'#464646'}  variant={'outline'} {...field} placeholder='password' />
+                   <Input autoComplete="off"  bg={'#121212'} textStyle={'secondary'} size='lg' type={show ? 'text' : 'password'} color='text.300'  borderColor={'#464646'}  variant={'outline'} {...field} placeholder='Password' />
                    <InputRightElement display={'flex'} h='100%' alignItems='center' width='4.5rem'>
                       <Button h='1.75rem' variant='text' colorScheme='brand' size='sm' onClick={handleClick}>
                         {show ? 'Hide' : 'Show'} 
@@ -254,7 +254,7 @@ const Login = () => {
             )}
           </Field>
           <Button
-            mt={4}
+            mt={6}
             // colorScheme='teal'
             isDisabled = {props.errors.email || props.errors.password || props.values.email === '' || props.values.password === ''}
             isLoading={isSubmitting}
