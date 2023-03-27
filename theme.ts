@@ -37,7 +37,6 @@ const config: ThemeConfig ={
             borderColor:'#333333',
             backgroundColor:'transparent',
             borderRadius: '50px',
-            borderWidth:'2px'
           },
           ghost:{
             fontWeight:600,

@@ -228,7 +228,8 @@ const Login = () => {
           <Field name='email' validate={validateEmail}>
             {({ field, form }) => (
                 <FormControl bg={'#121212'} isRequired style={{marginBottom:'.8rem'}} isInvalid={form.errors.email && form.touched.email}>
-                <Input    type='email' textStyle={'secondary'} color='text.300' borderWidth='2px' size='lg' borderColor={'#464646'}  variant={'outline'} {...field} placeholder='Email' />
+                <FormLabel color={'text.300'}>Email</FormLabel>
+                <Input    type='email' textStyle={'secondary'} color='text.300'  size='lg' borderColor={'#464646'}  variant={'outline'} {...field} placeholder='Email' />
                 <FormErrorMessage>{form.errors.email}</FormErrorMessage>
                </FormControl> 
             )} 
@@ -241,7 +242,7 @@ const Login = () => {
                       {!form.errors.password && form.values.password !== ''?<Text color='green.300'>{'✓'}</Text>:null}
                     </Flex>
                   <InputGroup  size='md'>
-                   <Input  bg={'#121212'} textStyle={'secondary'} size='lg' type={show ? 'text' : 'password'} color='text.300' borderWidth='2px' borderColor={'#464646'}  variant={'outline'} {...field} placeholder='password' />
+                   <Input  bg={'#121212'} textStyle={'secondary'} size='lg' type={show ? 'text' : 'password'} color='text.300'  borderColor={'#464646'}  variant={'outline'} {...field} placeholder='password' />
                    <InputRightElement display={'flex'} h='100%' alignItems='center' width='4.5rem'>
                       <Button h='1.75rem' variant='text' colorScheme='brand' size='sm' onClick={handleClick}>
                         {show ? 'Hide' : 'Show'} 

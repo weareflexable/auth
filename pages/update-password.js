@@ -6,9 +6,8 @@ import {Flex, Text, Alert, FormHelperText, useToast, FormLabel, AlertDescription
 import {Formik, Form, Field} from 'formik'
 
 const UpdatePassword = () => {
-  const [password, setPassword] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [showSuccessAlert, setShowSuccessAlert] = useState(true)
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false)
   const passwordRef = useRef(null)
 
   const toast = useToast()
@@ -19,9 +18,10 @@ const UpdatePassword = () => {
 
   const router = useRouter();
   // todo: functions
-  const handleUpdate = async (e) => {
+  const handleUpdate = async (value) => {
+    console.log(value)
     setIsSubmitting(true)
-    const { error } = await updatePassword(password);
+    const { error } = await updatePassword(value.password);
     if (error) {
       setIsSubmitting(false)
       toast({
@@ -33,7 +33,7 @@ const UpdatePassword = () => {
     } else {
       setIsSubmitting(false)
       setShowSuccessAlert(true)
-      // router.push("/login");
+
     }
   };
 
@@ -73,7 +73,7 @@ const UpdatePassword = () => {
                       {!form.errors.password && form.values.password !== ''?<Text color='green.300'>{'✓'}</Text>:null}
                     </Flex>
                     <InputGroup>
-                      <Input type={show?'text':'password'} ref={passwordRef} focusBorderColor={ props.touched.password && form.errors.password ? 'red.300':props.touched.password && props.isValid.password?'green.400':'brand.100'} textStyle={'secondary'}  bg={'#121212'} color='text.300' borderWidth='2px' size='lg' borderColor={'#464646'}  variant={'outline'} {...field} placeholder='Password' />
+                      <Input type={show?'text':'password'} ref={passwordRef} focusBorderColor={ props.touched.password && form.errors.password ? 'red.300':props.touched.password && props.isValid.password?'green.400':'brand.100'} textStyle={'secondary'}  bg={'#121212'} color='text.300' size='lg' borderColor={'#464646'}  variant={'outline'} {...field} placeholder='Password' />
                       <InputRightElement display={'flex'} h='100%' alignItems='center' width='4.5rem'>
                           <Button h='1.75rem' variant='text' colorScheme='brand' size='sm' onClick={handleClick}>
                             {show ? 'Hide' : 'Show'} 
@@ -94,7 +94,7 @@ const UpdatePassword = () => {
                       {form.touched.confirmPassword && props.values.password !== '' && props.values.password === props.values.confirmPassword ?<Text color='green.300'>{'✓'}</Text>:null}
                     </Flex>
                     <InputGroup>
-                      <Input type={showConfirm?'text':'password'} disabled={props.values.password === ''} focusBorderColor={form.touched.confirmPassword && props.values.password !== props.values.confirmPassword ? 'red.300':'green.400'} textStyle={'secondary'}  bg={'#121212'} color='text.300' borderWidth='2px' size='lg' borderColor={'#464646'}  variant={'outline'} {...field} placeholder='Confirm password' />
+                      <Input type={showConfirm?'text':'password'} disabled={props.values.password === ''} focusBorderColor={form.touched.confirmPassword && props.values.password !== props.values.confirmPassword ? 'red.300':'green.400'} textStyle={'secondary'}  bg={'#121212'} color='text.300' size='lg' borderColor={'#464646'}  variant={'outline'} {...field} placeholder='Confirm password' />
                       <InputRightElement display={'flex'} h='100%' alignItems='center' width='4.5rem'>
                         <Button h='1.75rem' variant='text' colorScheme='brand' size='sm' onClick={()=>setShowConfirm(!showConfirm)}>
                           {showConfirm ? 'Hide' : 'Show'} 
