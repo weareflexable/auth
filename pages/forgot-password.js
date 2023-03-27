@@ -79,7 +79,7 @@ const ForgotPassword = () => {
             mt={4}
             // colorScheme='teal'
             isLoading={isSubmitting} 
-            isDisabled = {props.values.email!=='' || props.errors.email}
+            isDisabled = {props.values.email === ' ' || props.errors.email}
             w={'100%'}
             colorScheme='brand'
             size='lg'
