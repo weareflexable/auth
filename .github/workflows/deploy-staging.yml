@@ -30,12 +30,14 @@ jobs:
       - name: NextJS Build 
         run: |
           npm ci
-          if [ "$GITHUB_REF_NAME" = dev ]; then echo $DEV_ENV_FILE | base64 --decode > .env; fi
+          if [ "$GITHUB_REF_NAME" = main ]; then echo $DEV_ENV_FILE | base64 --decode > .env; fi
           if [ "$GITHUB_REF_NAME" = staging ]; then echo $STAGING_ENV_FILE | base64 --decode > .env; fi
           if [ "$GITHUB_REF_NAME" = prod ]; then echo $PROD_ENV_FILE | base64 --decode > .env; fi
           npm run build
         env:
+          DEV_ENV_FILE: ${{secrets.DEV_ENV_FILE}}
           STAGING_ENV_FILE: ${{secrets.STAGING_ENV_FILE}}
+          PROD_ENV_FILE: ${{secrets.PROD_ENV_FILE}}
       
       - name: Upload Next build          # Upload the artifact
         uses: actions/upload-artifact@v2
@@ -45,8 +47,8 @@ jobs:
             .next
             public
             .env
-          retention-days: 7         # artifact retention duration, can be upto 30 days
-  docker-push:
+          retention-days: 0         # artifact retention duration, can be upto 30 days
+  ghcr-push:
     name:
     needs: next-build               # Job depends on next-build(above) job
     runs-on: ubuntu-latest

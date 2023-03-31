@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { checkUser, signOut } from "../utils/auth";
-import { toast } from "react-toastify";
 import withAuth from "../components/AuthWrapper";
 import Link from "next/link";
 import supabase from "../utils/supabaseClient";
@@ -10,6 +9,7 @@ import { getPaseto } from "../src/api/platform";
 import { useAuthContext } from "../context/AuthContext";
 import Redirect from "../components/Redirect";
 import Image from "next/image";
+import {Flex, Spinner} from '@chakra-ui/react'
 
 const Dashboard = () => {
   const { isAuthenticated, paseto } = useAuthContext();
@@ -17,10 +17,9 @@ const Dashboard = () => {
   // TODO: remove this component
   if (!paseto) {
     return (
-    <div className="text-white flex flex-col items-center text-center">
-      <h1 className="text-5xl font-bold font-figtree">Redirecting...</h1>
-      <span className="mt-4 w-[50%]">You&nbsp;re being redirected to another page. It may take a while so sit tight and stay flexable!</span>
-    </div>
+    <Flex h={'100%'} minH='100vh' justifyContent={'center'} bg='#121212' alignItems='center'>
+      <Spinner size='xl' />
+    </Flex>
   )
   }
 
