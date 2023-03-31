@@ -1,12 +1,8 @@
-import React, { useState, useRef, useEffect } from "react";
-import Link from "next/link";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Head from "next/head";
 import { signIn, signInWithProvider } from "../utils/auth";
-import { getPlatformPaseto, setPlatformPaseto } from "../src/storage";
-import { getPaseto } from "../src/api/platform";
-import supabase from "../utils/supabaseClient";
 import { Button, Input, HStack, Divider, Box, useToast, InputRightElement, InputGroup, Flex, Text, FormControl, FormLabel, FormErrorMessage, propNames} from "@chakra-ui/react";
 import {Form, Formik, Field} from 'formik'
 
@@ -19,10 +15,6 @@ const Login = () => {
   // const emailRef = useRef(null)
   const { redirect_to } = router.query;
   const toast = useToast()
-
-  useEffect(() => {
-    // emailRef.current.focus()
-  }, [])
 
   // todo: functions
   const handleSignIn = async (values) => {
