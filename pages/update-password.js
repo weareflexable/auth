@@ -146,7 +146,7 @@ const UpdatePassword = () => {
             <Text color={'text.200'} textStyle='secondary'>
               Your password has been successfully changed. Go back to login page and try out your new password
               </Text>
-              <Button mt='3' variant={'link'} onClick={()=>router.push('/login')}>Goto Login</Button>
+              <Button mt='3' variant={'link'} onClick={()=>router.push('/login')}>Go to Login</Button>
           </AlertDescription>
     </Alert>
     </Box>
