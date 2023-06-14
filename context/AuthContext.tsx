@@ -52,6 +52,8 @@ const AuthContextProvider = ({children}:AuthContextProviderProps)=>{
         (event, session) => {
           // updateSupabaseCookie(event, session);
 
+          console.log(session)
+
 
 
           if (event === "SIGNED_IN" || event === 'PASSWORD_RECOVERY') {
@@ -89,9 +91,9 @@ const AuthContextProvider = ({children}:AuthContextProviderProps)=>{
         };
       }, [router]); // try removing deps
   
-    async function updateSupabaseCookie(event, session) {
-      await axios.post("/api/auth", { event, session });
-    }
+    // async function updateSupabaseCookie(event, session) {
+    //   await axios.post("/api/auth", { event, session });
+    // }
   
     const values: Values = {
         isAuthenticated,
