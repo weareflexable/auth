@@ -209,7 +209,6 @@ const Login = () => {
             {/* <Divider color={'red'} /> */}
           </HStack>
 
-          {/* <form onSubmit={handleSignIn}> */}
           <Box maxW='500px' px='1rem' w='100%'>
           <Formik
             initialValues={{ email: '', password: '' }}
