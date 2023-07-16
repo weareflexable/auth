@@ -72,6 +72,9 @@ const Login = () => {
     if(router.query.payment){
       localStorage.setItem("payment",router.query.payment)
     }
+    if(router.query.checkout){
+      localStorage.setItem("checkout",router.query.checkout)
+    }
     router.push("/register");
   }
 
