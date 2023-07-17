@@ -26,6 +26,9 @@ const Login = () => {
       localStorage.setItem("payment",router.query.payment)
     }
     
+    if(router.query.checkout){
+      localStorage.setItem("checkout",router.query.checkout)
+    }
    
     setIsSubmitting(true); 
     const { error, session } = await signIn({ email, password });
@@ -57,6 +60,9 @@ const Login = () => {
     localStorage.setItem("redirect_to", redirect_to);
     if(router.query.payment){
       localStorage.setItem("payment",router.query.payment)
+    }
+    if(router.query.checkout){
+      localStorage.setItem("checkout",router.query.checkout)
     }
 
     // this redirects whenever it's succesful
