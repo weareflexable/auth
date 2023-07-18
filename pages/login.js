@@ -26,6 +26,9 @@ const Login = () => {
       localStorage.setItem("payment",router.query.payment)
     }
     
+    if(router.query.checkout){
+      localStorage.setItem("checkout",router.query.checkout)
+    }
    
     setIsSubmitting(true); 
     const { error, session } = await signIn({ email, password });
@@ -58,6 +61,9 @@ const Login = () => {
     if(router.query.payment){
       localStorage.setItem("payment",router.query.payment)
     }
+    if(router.query.checkout){
+      localStorage.setItem("checkout",router.query.checkout)
+    }
 
     // this redirects whenever it's succesful
     setIsSubmitting(true);
@@ -71,6 +77,9 @@ const Login = () => {
     localStorage.setItem("redirect_to", redirect_to);
     if(router.query.payment){
       localStorage.setItem("payment",router.query.payment)
+    }
+    if(router.query.checkout){
+      localStorage.setItem("checkout",router.query.checkout)
     }
     router.push("/register");
   }
@@ -209,7 +218,6 @@ const Login = () => {
             {/* <Divider color={'red'} /> */}
           </HStack>
 
-          {/* <form onSubmit={handleSignIn}> */}
           <Box maxW='500px' px='1rem' w='100%'>
           <Formik
             initialValues={{ email: '', password: '' }}
