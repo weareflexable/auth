@@ -14,7 +14,28 @@ import {Flex, Spinner} from '@chakra-ui/react'
 const Dashboard = () => {
   const { isAuthenticated, paseto } = useAuthContext();
 
-  // TODO: remove this component
+  // useEffect(()=>{
+  //   // if paseto doesn't exist
+  //   if(!paseto){
+  //     // check if accesstoken exists
+  //     const hasAccessToken = localStorage.getItem('supabase.auth.token')
+  //     if(hasAccessToken){
+  //       const supabase = JSON.parse(localStorage.getItem('supabase.auth.token'));
+  //       const accessToken = supabase.accessToken
+  //       // if accessToken exist, call paseto API again
+  //       console.log(accessToken)
+
+  //     }else{
+  //       // take user back to auth page and maybe tell them what the problem was before navigating back
+  //     }
+
+  //     return
+  //   }
+  //   // if accessToken doesn't, show error message and send user back to auth page
+  //   // if access token exists, c
+  // })
+
+
   if (!paseto) {
     return (
     <Flex h={'100%'} minH='100vh' justifyContent={'center'} bg='#121212' alignItems='center'>
