@@ -108,10 +108,10 @@ jobs:
             pwd
             cd ~
             echo ${{ secrets.GHCR_TOKEN }} | podman login ghcr.io -u secrets.GHCR_USERNAME --password-stdin
-            podman pull ghcr.io/weareflexable/auth:staging
-            podman stop auth
-            podman rm auth
-            podman run --name="auth" -p 9080:3000 -d ghcr.io/weareflexable/auth:staging
+            sudo podman pull ghcr.io/weareflexable/auth:staging
+            sudo podman stop auth
+            sudo podman rm auth
+            sudo podman run --name="auth" -p 9080:3000 -d ghcr.io/weareflexable/auth:staging
 
       - name: Deploy on Prod server 
         if: github.ref == 'refs/heads/prod'
