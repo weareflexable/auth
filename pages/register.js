@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Image from "next/image";
@@ -6,6 +6,9 @@ import Head from "next/head";
 import { signUp } from "../utils/auth";
 import {Flex, Text, Alert, useToast, FormHelperText, FormLabel, AlertDescription, AlertTitle, AlertIcon, Box,FormControl, Input, FormErrorMessage, InputGroup, Button, InputRightElement} from '@chakra-ui/react'
 import {Formik, Form, Field} from 'formik'
+import { 
+  useGoogleReCaptcha
+} from 'react-google-recaptcha-v3';
 
 const Register = () => {
   // todo: states
@@ -13,6 +16,25 @@ const Register = () => {
   const [show, setShow] = useState(false)
   const [showConfirm, setShowConfirm] = useState(false)
   const [showSuccessAlert, setShowSuccessAlert] = useState(false)
+
+  const { executeRecaptcha } = useGoogleReCaptcha();
+
+    // Create an event handler so you can call the verification on button click event or form submit
+    const handleReCaptchaVerify = useCallback(async () => {
+      if (!executeRecaptcha) {
+        console.log('Execute recaptcha not yet available');
+        return;
+      }
+
+    const token = await executeRecaptcha('yourAction');
+    // Do whatever you want with the token
+  }, [executeRecaptcha]);
+
+
+   // You can use useEffect to trigger the verification as soon as the component being loaded
+   useEffect(() => {
+    handleReCaptchaVerify();
+  }, [handleReCaptchaVerify]);
 
   const emailRef = useRef(null)
  
@@ -31,6 +53,8 @@ const Register = () => {
   const handleSignUp = async (values) => {
 
     let {email, password} = values
+
+    handleReCaptchaVerify()
 
     setIsSubmitting(true)
     const { error, session } = await signUp({ email, password });
