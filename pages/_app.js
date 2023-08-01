@@ -1,8 +1,11 @@
 import "../styles/globals.css";
-import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer } from "react-toastify";
 import { AuthContextProvider } from "../context/AuthContext";
 import Head from "next/head";
+import {ChakraProvider} from '@chakra-ui/react'
+import theme from '../theme'
+import {
+  GoogleReCaptchaProvider,
+} from 'react-google-recaptcha-v3';
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -13,18 +16,13 @@ function MyApp({ Component, pageProps }) {
         <link rel="icon" href="/logos/logo_colored.png" />
       </Head>
       <div className="h-[92vh]">
-        <AuthContextProvider>
-          <Component {...pageProps} />
-        </AuthContextProvider>
-        <ToastContainer
-          position="bottom-center"
-          autoClose={5000}
-          hideProgressBar={false}
-          closeOnClick={true}
-          pauseOnHover={true}
-          draggable={true}
-          dark
-        />
+        <ChakraProvider theme={theme}>
+        <GoogleReCaptchaProvider reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}>
+          <AuthContextProvider>
+            <Component {...pageProps} />
+          </AuthContextProvider>
+        </GoogleReCaptchaProvider>
+        </ChakraProvider>
       </div>
     </>
   );

@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { checkUser, signOut } from "../utils/auth";
-import { toast } from "react-toastify";
 import withAuth from "../components/AuthWrapper";
 import Link from "next/link";
 import supabase from "../utils/supabaseClient";
@@ -10,17 +9,38 @@ import { getPaseto } from "../src/api/platform";
 import { useAuthContext } from "../context/AuthContext";
 import Redirect from "../components/Redirect";
 import Image from "next/image";
+import {Flex, Spinner} from '@chakra-ui/react'
 
 const Dashboard = () => {
   const { isAuthenticated, paseto } = useAuthContext();
 
-  // TODO: remove this component
+  // useEffect(()=>{
+  //   // if paseto doesn't exist
+  //   if(!paseto){
+  //     // check if accesstoken exists
+  //     const hasAccessToken = localStorage.getItem('supabase.auth.token')
+  //     if(hasAccessToken){
+  //       const supabase = JSON.parse(localStorage.getItem('supabase.auth.token'));
+  //       const accessToken = supabase.accessToken
+  //       // if accessToken exist, call paseto API again
+  //       console.log(accessToken)
+
+  //     }else{
+  //       // take user back to auth page and maybe tell them what the problem was before navigating back
+  //     }
+
+  //     return
+  //   }
+  //   // if accessToken doesn't, show error message and send user back to auth page
+  //   // if access token exists, c
+  // })
+
+
   if (!paseto) {
     return (
-    <div className="text-white flex flex-col items-center text-center">
-      <h1 className="text-5xl font-bold font-figtree">Redirecting...</h1>
-      <span className="mt-4 w-[50%]">You&nbsp;re being redirected to another page. It may take a while so sit tight and stay flexable!</span>
-    </div>
+    <Flex h={'100%'} minH='100vh' justifyContent={'center'} bg='#121212' alignItems='center'>
+      <Spinner size='xl' />
+    </Flex>
   )
   }
 

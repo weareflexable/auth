@@ -12,16 +12,19 @@ export default function Redirect() {
 
     useEffect(() => {
         const redirectTo = localStorage.getItem('redirect_to')
+        const paymentStatus = localStorage.getItem('payment');
+        const checkoutStatus = localStorage.getItem('checkout');
         const paseto = localStorage.getItem('PLATFORM_PASETO')
 
-        const redirectUrl = redirectTo === 'portal' ? `${process.env.NEXT_PUBLIC_PORTAL}?paseto=${paseto}` : `${process.env.NEXT_PUBLIC_MARKETPLACE}?paseto=${paseto}`
-        // const redirectUrl = redirectTo === 'portal'?`http://localhost:3000/login?paseto=${paseto}`:`http://localhost:3001?paseto=${paseto}`
+        const marketplaceReturnUrl = paymentStatus ? `${process.env.NEXT_PUBLIC_MARKETPLACE}?paseto=${paseto}&payment=pending` : checkoutStatus? `${process.env.NEXT_PUBLIC_MARKETPLACE}?paseto=${paseto}&checkout=pending`: `${process.env.NEXT_PUBLIC_MARKETPLACE}?paseto=${paseto}`
+
+        const redirectUrl = redirectTo === 'portal' ? `${process.env.NEXT_PUBLIC_PORTAL}?paseto=${paseto}` : marketplaceReturnUrl
+        // const redirectUrl = redirectTo === 'portal'?`http://localhost:3000/login?paseto=${paseto}`: `http://localhost:3006/login?paseto=${paseto}&payment=pending`
         setTimeout(() => {
-            router.replace(redirectUrl)
-            setIsRedirecting(false)
+            router.replace(redirectUrl) 
+            setIsRedirecting(false) 
             // clear storage
-            localStorage.removeItem('PLATFORM_PASETO')
-            localStorage.removeItem('redirect_to')
+            // localStorage.clear()
             supabase.auth.signOut()
         }, 4000)
     }, [router])

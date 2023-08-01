@@ -1,14 +1,10 @@
-import React from "react";
-import Link from "next/link";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Head from "next/head";
-import { toast } from "react-toastify";
 import { signIn, signInWithProvider } from "../utils/auth";
-import { getPlatformPaseto, setPlatformPaseto } from "../src/storage";
-import { getPaseto } from "../src/api/platform";
-import supabase from "../utils/supabaseClient";
+import { Button, Input, HStack, Divider, Box, useToast, InputRightElement, InputGroup, Flex, Text, FormControl, FormLabel, FormErrorMessage, propNames} from "@chakra-ui/react";
+import {Form, Formik, Field} from 'formik'
 
 const Login = () => {
   // todo: states
@@ -16,35 +12,59 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
+  // const emailRef = useRef(null)
   const { redirect_to } = router.query;
+  const toast = useToast()
 
   // todo: functions
-  const handleSignIn = async (e) => {
+  const handleSignIn = async (values) => {
+    console.log(values)
+    const {email, password} = values
+    // e.preventDefault();
     localStorage.setItem("redirect_to", redirect_to);
-    e.preventDefault();
-    if (!email || !password) {
-      toast.error("One or more fields are missing");
-      return;
+    if(router.query.payment){
+      localStorage.setItem("payment",router.query.payment)
     }
-    setIsSubmitting(true);
+    
+    if(router.query.checkout){
+      localStorage.setItem("checkout",router.query.checkout)
+    }
+   
+    setIsSubmitting(true); 
     const { error, session } = await signIn({ email, password });
-    console.log("login session", session);
     if (error) {
+      console.log(error)
       setIsSubmitting(false);
-      toast.error(error.message);
+      toast({
+        title: `${error.message}`, 
+        status: 'error',
+        position:'top-right',
+        isClosable: true,
+      }) 
     }
     if (session) {
       setIsSubmitting(false);
       // getPaseto(supabase.auth.session().access_token).then(setPlatformPaseto);
       // const paseto = getPlatformPaseto();
-      toast.success("Logged in successfully");
+      toast({
+        title: `Login successful!`,
+        status: 'success',
+        position:'top-right',
+        isClosable: true,
+      })
       router.push(`/dashboard`);
     }
   };
 
   const handleProviderLogin = async (provider) => {
     localStorage.setItem("redirect_to", redirect_to);
-    setIsSubmitting(true);
+    if(router.query.payment){
+      localStorage.setItem("payment",router.query.payment)
+    }
+    if(router.query.checkout){
+      localStorage.setItem("checkout",router.query.checkout)
+    }
+
     // this redirects whenever it's succesful
     setIsSubmitting(true);
     const { error, user } = await signInWithProvider(provider);
@@ -55,7 +75,36 @@ const Login = () => {
 
   function handleRegister() {
     localStorage.setItem("redirect_to", redirect_to);
+    if(router.query.payment){
+      localStorage.setItem("payment",router.query.payment)
+    }
+    if(router.query.checkout){
+      localStorage.setItem("checkout",router.query.checkout)
+    }
     router.push("/register");
+  }
+
+  const [show, setShow] = React.useState(false)
+  const handleClick = () => setShow(!show)
+
+  function validateEmail(value) {
+    let error
+    const emailPattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
+    if (!value) {
+      error = 'Email is required'
+    } else if (!emailPattern.test(value.toLowerCase())) { // regex for email
+      error = "Please use the correct email format eg billcage@yahoo.com 😱"
+    }
+    return error
+  }
+  function validatePassword(value) {
+    let error
+    if (!value) {
+      error = 'Password is required'
+    } else if (value.length < 7) {
+      error = "Please provide a minimum of 8 characters for your password"
+    }
+    return error
   }
 
   return (
@@ -134,53 +183,102 @@ const Login = () => {
             </div>
           </div>
         </div>
+
         <div className="flex flex-col flex-grow bg-black lg:w-1/2 text-center lg:text-left items-center justify-center ">
           <h1 className="text-3xl font-figtree text-white font-semibold lg:mt-0 mb-8 mt-8">
             Login
           </h1>
-          <button
-            className="bg-transparent font-figtree border-2 border-[#2A2B2A] text-[#AB4DF7] rounded-3xl w-80 h-10 md:mt-4 mb-6"
+          <Flex maxW='500px' w='100%' px={['1rem','0','0','0']} direction='column'>
+
+          
+          <Button
+            variant={'outline'}
+            colorScheme='brand'
+            width='100%'
+            mb='4'
+            size='lg'
+            onClick={() => handleProviderLogin("apple")}
+          >
+            Continue with Apple
+          </Button>
+          <Button
+            variant={'outline'}
+            colorScheme='brand'
+            width='100%'
+            mb='4'
+            size='lg'
             onClick={() => handleProviderLogin("google")}
           >
             Continue with Google
-          </button>
-          <span className="font-figtree font-bold text-[#6E6E6F] mb-8">OR</span>
-          <form onSubmit={handleSignIn}>
-            <input
-              className="form-input rounded-sm shadow-sm mb-4 w-[95%] md:w-full pl-2 h-12 bg-transparent border-2 text-[#6E6E6F] font-figtree border-[#2A2B2A] "
-              type="email"
-              id="email"
-              placeholder="Email"
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-            />
-            <input
-              className="form-input rounded-sm shadow-sm w-[95%] md:w-full pl-2 h-12 bg-transparent border-2 text-[#6E6E6F] font-figtree border-[#2A2B2A]"
-              type="password"
-              id="password"
-              placeholder="Password"
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-            />
-            <button
-              className="btn btn-primary mt-8 bg-[#AB4DF7] font-figtree font-semibold w-[95%] md:w-full h-10 rounded-3xl"
-              type="submit"
-            >
-              Login
-            </button>
-            <div className="flex mt-2 justify-center">
-              <p className="font-figtree text-white">No account?</p>
+          </Button>
+          </Flex>
 
-              <p onClick={handleRegister} className="text-[#AB4DF7] font-figtree ml-1.5">
-                Sign up
-              </p>
-            </div>
-            <div className="flex justify-center mt-1.5 mb-16">
-              <p className="font-figtree text-[#AB4DF7]">
-                <Link href="/forgot-password">Forgot password?</Link>
-              </p>
-            </div>
-          </form>
+          <HStack direction='row' h='70px' p={4}>
+            <Text color={'text.200'} textStyle={'buttonLabel'}>OR</Text>
+            {/* <Divider color={'red'} /> */}
+          </HStack>
+
+          <Box maxW='500px' px='1rem' w='100%'>
+          <Formik
+            initialValues={{ email: '', password: '' }}
+            onSubmit={(values) => handleSignIn(values) }
+          >
+        {(props) => (
+        <Form autoComplete="new-password" style={{width:'100%'}}>
+          <Field name='email' validate={validateEmail}>
+            {({ field, form }) => (
+                <FormControl isRequired style={{marginBottom:'.8rem'}} isInvalid={form.errors.email && form.touched.email}>
+                <FormLabel color={'text.300'}>Email</FormLabel>
+                <Input type='email' textStyle={'secondary'} color='text.300'  size='lg' borderColor={'#464646'}  variant={'outline'} {...field} placeholder='Email' />
+                <FormErrorMessage>{form.errors.email}</FormErrorMessage>
+               </FormControl> 
+            )} 
+          </Field>
+          <Field name='password' validate={validatePassword}>
+            {({ field, form }) => (
+                <FormControl isRequired isInvalid={form.errors.password && form.touched.password}>
+                  <Flex justifyContent={'space-between'}>
+                      <FormLabel color={'text.300'}>Password</FormLabel>
+                      {!form.errors.password && form.values.password !== ''?<Text color='green.300'>{'✓'}</Text>:null}
+                    </Flex>
+                  <InputGroup  size='md'>
+                   <Input autoComplete="new-password"  bg={'#121212'} textStyle={'secondary'} size='lg' type={show ? 'text' : 'password'} color='text.300'  borderColor={'#464646'}  variant={'outline'} {...field} placeholder='Password' />
+                   <InputRightElement display={'flex'} h='100%' alignItems='center' width='4.5rem'>
+                      <Button h='1.75rem' variant='text' colorScheme='brand' size='sm' onClick={handleClick}>
+                        {show ? 'Hide' : 'Show'} 
+                      </Button>
+                  </InputRightElement>
+                  </InputGroup>
+                <FormErrorMessage>{form.errors.password}</FormErrorMessage>
+               </FormControl> 
+            )}
+          </Field>
+          <Button
+            mt={6}
+            // colorScheme='teal'
+            isDisabled = {props.errors.email || props.errors.password || props.values.email === '' || props.values.password === ''}
+            isLoading={isSubmitting}
+            w={'100%'}
+            colorScheme='brand'
+            size='lg'
+            type="submit"
+          >
+            Login
+          </Button>
+        </Form>
+      )}
+        </Formik>
+
+         <Flex w={'100%'} justifyContent='space-between'>
+            <Flex my='4'>
+              <Text color='text.200' mr='1'>No account? </Text>
+              <Button variant={'link'} onClick={handleRegister}>
+                 Sign up
+              </Button>
+            </Flex>
+            <Button variant={'link'} onClick={()=>router.push('/forgot-password')}>Forgot password?</Button>
+         </Flex>
+        </Box>
         </div>
       </div>
     </>

@@ -1,89 +1,148 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Head from "next/head";
 import Link from "next/link";
-import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import { createRecovery } from "../utils/auth";
+import {Flex, Text, Alert, AlertDescription, FormLabel, useToast, AlertTitle, AlertIcon, Box,FormControl, Input, FormErrorMessage, InputGroup, Button, InputRightElement} from '@chakra-ui/react'
+import {Formik, Form, Field} from 'formik'
 
 const ForgotPassword = () => {
   // todo: states
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false)
   const router = useRouter();
 
+  const toast = useToast()
+
+  const emailRef = useRef(null)
+
+  useEffect(() => {
+    emailRef.current.focus()
+  }, [])
+
   // todo: functions
-  const handleSignIn = async (e) => {
-    e.preventDefault();
-    if (!email) {
-      toast.error("Must provide an email");
-      return;
-    }
+  const handleSignIn = async (values) => {
+    const {email} = values
+
     setIsSubmitting(true);
     const { error } = await createRecovery(email);
     if (error) {
       setIsSubmitting(false);
-      toast.error(error.message);
+      toast({
+        title: `${error.message}`,
+        status: 'error',
+        position:'top-right',
+        isClosable: true,
+      })
     } else {
       setIsSubmitting(false);
-      toast.success("Check your email inbox");
-      router.push("/");
+      setShowSuccessAlert(true)
     }
   };
 
+  function validateEmail(value) {
+    let error
+    const emailPattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
+    if (!value) {
+      error = 'Email is required'
+    } else if (!emailPattern.test(value.toLowerCase())) { // regex for email
+      error = "Please use the correct email format eg billcage@yahoo.com 😱"
+    }
+    return error
+  }
+  
+  const recoveryForm = (
+      <Box w='100%'  maxW='500px' mx='4 auto'> 
+        <Flex mx='4' mt='5' justifyContent={'flex-start'} mb='5'>
+          {/* <h1 className="text-5xl font-figtree text-white">Forgot Password</h1> */}
+          <Text color={'text.300'} textStyle='h3'>Recover Password</Text>
+        </Flex>
+
+        <Box borderRadius='4px' p={4} w='100%'>
+          <Formik
+            initialValues={{ email: ' ' }}
+            onSubmit={(values) => handleSignIn(values) }
+          >
+        {(props) => (
+        <Form style={{width:'100%'}}>
+          <Field name='email' validate={validateEmail}>
+            {({ field, form }) => (
+                <FormControl bg={'#121212'} isRequired style={{marginBottom:'.8rem'}} isInvalid={props.errors.email && props.touched.email}>
+                <FormLabel color={'text.300'}>Email</FormLabel>
+                <Input type='email' bg={'#121212'} ref={emailRef} textStyle={'secondary'} color='text.300' size='lg' borderColor={'#464646'}  variant={'outline'} {...field} placeholder='Email' />
+                <FormErrorMessage>{form.errors.email}</FormErrorMessage>
+               </FormControl> 
+            )} 
+          </Field>
+          <Button
+            mt={4}
+            // colorScheme='teal'
+            isLoading={isSubmitting} 
+            isDisabled = {props.values.email === ' ' || props.errors.email}
+            w={'100%'}
+            colorScheme='brand'
+            size='lg'
+            type="submit"
+          >
+            Send Recovery Link
+          </Button>
+        </Form>
+      )}
+        </Formik>
+
+         <Flex  w={'100%'} justifyContent='space-between'>
+            <Flex my='4'>
+              <Text color='text.200' mr='1'>Back to </Text>
+              <Button variant={'link'} onClick={()=>router.back()}>
+                 Sign in
+              </Button>
+            </Flex>
+         </Flex>
+        </Box>
+      </Box>
+  )
+
+  const successAlert = (
+    <Box w='100%' px='4' maxW='500px'>
+    <Alert
+      w={'100%'}
+      borderRadius='4px'
+      status='success'
+      variant='subtle'
+      bg={'#9ae6b429'}
+      flexDirection='column'
+      alignItems='center'
+      justifyContent='center'
+      textAlign='center'
+      height='200px'
+    >
+      <AlertIcon boxSize='40px' mr={0} />
+      <AlertTitle mt={4} mb={2} fontSize='lg'>
+        <Text color='text.300' textStyle={'h4'}>Recovery Link Sent!</Text>
+      </AlertTitle> 
+      <AlertDescription maxWidth='sm'>
+        <Text color={'text.200'} textStyle='secondary'>
+          Your password recovery link has been sent to your email. Please follow the link in your email and update your password
+          </Text>
+      </AlertDescription>
+</Alert>
+</Box>
+  )
   return (
-    <div className="bg-black min-h-screen flex items-start justify-center">
+    <Flex justifyContent={'center'} align='center' bg='#121212' h={'100%'} minH='100vh'>
       <Head>
-        <title>Flexable | Forgot Password</title>
-        <meta name="description" content="Generated by create next app" />
+        <title>Password Recovery | Flexable</title>
         <link rel="icon" href="/logos/logo_colored.png" />
       </Head>
 
-      <div className="w-full max-w-sm">
-        <div className="flex justify-center items-center mt-8 mb-20">
-          <h1 className="text-5xl font-figtree text-white">Forgot Password</h1>
-        </div>
-
-        <form
-          onSubmit={handleSignIn}
-          className="bg-[#242525] shadow-md rounded px-8 pt-6 pb-8 mb-4"
-        >
-          <div className="mb-4">
-            <label
-              className="block text-gray-400 font-figtree text-sm font-bold mb-2"
-              for="email"
-            >
-              Email
-            </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="email"
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <div className="flex items-center justify-between">
-            <button
-              className="bg-[#AB4DF7] text-black hover:bg-transparent border-2 hover:text-white border-[#AB4DF7] font-bold py-2 px-4 rounded-3xl focus:outline-none focus:shadow-outline"
-              type="submit"
-              disabled={isSubmitting || !email}
-            >
-              Submit
-            </button>
-            <div className="flex font-figtree">
-              <span className="text-gray-400">
-                Back to
-                <div className="inline-block align-baseline text-[#AB4DF7] ml-1.5">
-                  <Link href="/login">Sign In</Link>
-                </div>
-              </span>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
+      {showSuccessAlert? successAlert: recoveryForm}
+      
+    </Flex>
   );
 };
 
 export default ForgotPassword;
+
+
+

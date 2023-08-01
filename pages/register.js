@@ -1,46 +1,217 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Head from "next/head";
-import { toast } from "react-toastify";
 import { signUp } from "../utils/auth";
+import {Flex, Text, Alert, useToast, FormHelperText, FormLabel, AlertDescription, AlertTitle, AlertIcon, Box,FormControl, Input, FormErrorMessage, InputGroup, Button, InputRightElement} from '@chakra-ui/react'
+import {Formik, Form, Field} from 'formik'
+import { 
+  useGoogleReCaptcha
+} from 'react-google-recaptcha-v3';
 
 const Register = () => {
   // todo: states
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [retypedPassword, setRetypedPassword] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [show, setShow] = useState(false)
+  const [showConfirm, setShowConfirm] = useState(false)
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false)
+
+  const { executeRecaptcha } = useGoogleReCaptcha();
+
+    // Create an event handler so you can call the verification on button click event or form submit
+    const handleReCaptchaVerify = useCallback(async () => {
+      if (!executeRecaptcha) {
+        console.log('Execute recaptcha not yet available');
+        return;
+      }
+
+    const token = await executeRecaptcha('yourAction');
+    // Do whatever you want with the token
+  }, [executeRecaptcha]);
+
+
+   // You can use useEffect to trigger the verification as soon as the component being loaded
+   useEffect(() => {
+    handleReCaptchaVerify();
+  }, [handleReCaptchaVerify]);
+
+  const emailRef = useRef(null)
+ 
+
+  useEffect(() => {
+    if(!showSuccessAlert){
+      emailRef.current.focus()
+    }
+  }, [])
+
+  const toast = useToast()
 
   const router = useRouter();
 
   // todo: functions
-  const handleSignUp = async (e) => {
-    e.preventDefault();
-    if (!email || !password || !retypedPassword) {
-      return toast.error("please fill all the fields");
-    }
-    // if password is too short
-    if (password.toString().length < 7) {
-      return toast.error("password must be at leas 7 chars");
-    }
-    // if passwords do not match
-    if (password !== retypedPassword) {
-      return toast.error("passwords do not match");
-    }
+  const handleSignUp = async (values) => {
 
+    let {email, password} = values
+
+    handleReCaptchaVerify()
+
+    setIsSubmitting(true)
     const { error, session } = await signUp({ email, password });
     if (error) {
-      toast.error(error.message);
+      toast({
+        title: `${error.message}`,
+        status: 'error',
+        position:'top-right',
+        isClosable: true,
+      })
+      setIsSubmitting(false)
     } else {
-      setEmail("");
-      setPassword("");
-      setRetypedPassword("");
-      toast.dark("Sign Up Successful. Please check your email inbox");
+      setShowSuccessAlert(true)
+      setIsSubmitting(false)
     }
   };
 
+  function validatePassword(value){
+    let error;
+    if( value.length < 8){
+      error = 'Password must me 8 characters or more'
+    }
+    return error
+  }
+
+  function validateEmail(value) {
+    let error
+    const emailPattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
+    if (!value) {
+      error = 'Email is required'
+    } else if (!emailPattern.test(value.toLowerCase())) { // regex for email
+      error = "Please use the correct email format eg billcage@yahoo.com"
+    }
+    return error
+  }
+
+  const successAlert = (
+    <Box w='100%' px='4' maxW='500px'>
+    <Alert
+      w={'100%'}
+      borderRadius='4px'
+      status='success'
+      variant='subtle'
+      bg={'#9ae6b429'}
+      flexDirection='column'
+      alignItems='center'
+      justifyContent='center'
+      textAlign='center'
+      height='200px'
+    >
+      <AlertIcon boxSize='40px' mr={0} />
+      <AlertTitle mt={4} mb={2} fontSize='lg'>
+        <Text color='text.300' textStyle={'h4'}>Check your email!</Text>
+      </AlertTitle> 
+      <AlertDescription maxWidth='sm'>
+        <Text color={'text.200'} textStyle='secondary'>
+          A confirmation email has been sent to your newly registered email. Please confirm your account by clicking the link in the email
+          </Text>
+      </AlertDescription>
+</Alert>
+</Box>
+  )
+
+
+  const signUpForm = (
+  
+        <Box w='100%'  maxW='500px' mx='4 auto'> 
+            <Flex mt='6' justifyContent={'flex-start'} mb='6'>
+              {/* <h1 className="text-5xl font-figtree text-white">Forgot Password</h1> */}
+              <Text color={'text.300'} textStyle='h3'>Sign Up</Text>
+            </Flex>
+          
+          <Box borderRadius='4px'  w='100%'>
+              <Formik
+                initialValues={{ email: ' ', password: '' }}
+                onSubmit={handleSignUp}
+              >
+            {(props) => (
+            <Form style={{width:'100%'}}>
+              <Field name='email' validate={validateEmail}>
+                {({ field, form }) => (
+                  <FormControl bg={'#121212'} isRequired style={{marginBottom:'.8rem'}} isInvalid={form.errors.email && form.touched.email}>
+                      <FormLabel color={'text.300'}>Email</FormLabel>
+                    <Input autoComplete='off' ref={emailRef}  type='email' textStyle={'secondary'} color='text.300' size='lg' borderColor={'#464646'}  variant={'outline'} {...field} placeholder='Email' />
+                    <FormErrorMessage>{form.errors.email}</FormErrorMessage>
+                  </FormControl> 
+                )} 
+              </Field>
+              <Field name='password' validate={validatePassword}>
+                {({ field, form }) => (
+                   <FormControl bg={'#121212'}  isRequired style={{marginBottom:'1rem'}} isInvalid={form.errors.password && form.touched.password}>
+                    <Flex justifyContent={'space-between'}>
+                      <FormLabel color={'text.300'}>Password</FormLabel>
+                      {!form.errors.password && form.values.password !== ''?<Text color='green.300'>{'✓'}</Text>:null}
+                    </Flex>
+                    <InputGroup>
+                      <Input type={show?'text':'password'}  focusBorderColor={ props.touched.password && form.errors.password ? 'red.300':props.touched.password && props.isValid.password?'green.400':'brand.100'} textStyle={'secondary'}  bg={'#121212'} color='text.300' size='lg' borderColor={'#464646'}  variant={'outline'} {...field} placeholder='Password' />
+                      <InputRightElement display={'flex'} h='100%' alignItems='center' width='4.5rem'>
+                          <Button h='1.75rem' variant='text' colorScheme='brand' size='sm' onClick={()=>setShow(!show)}>
+                            {show ? 'Hide' : 'Show'} 
+                          </Button>
+                      </InputRightElement>
+                    </InputGroup>
+                   { form.errors.password? <FormErrorMessage>{form.errors.password}</FormErrorMessage>: <FormHelperText color={'text.300'}>
+                      Password should be a minimum of 8 characters
+                    </FormHelperText>}
+                   </FormControl> 
+                )} 
+              </Field>
+              <Field name='confirmPassword' validate={()=>{}}>
+                {({ field, form }) => (
+                    <FormControl bg={'#121212'} isRequired style={{marginBottom:'.8rem'}} isInvalid={form.touched.confirmPassword && props.values.password !== props.values.confirmPassword}>
+                    <Flex justifyContent={'space-between'}>
+                      <FormLabel color={'text.300'}>Confirm Password</FormLabel>
+                      {form.touched.confirmPassword && props.values.password !== '' && props.values.password === props.values.confirmPassword ?<Text color='green.300'>{'✓'}</Text>:null}
+                    </Flex>
+                    <InputGroup>
+                      <Input type={showConfirm?'text':'password'} disabled={props.values.password === ''} focusBorderColor={form.touched.confirmPassword && props.values.password !== props.values.confirmPassword ? 'red.300':'green.400'} textStyle={'secondary'}  bg={'#121212'} color='text.300' size='lg' borderColor={'#464646'}  variant={'outline'} {...field} placeholder='Confirm password' />
+                      <InputRightElement display={'flex'} h='100%' alignItems='center' width='4.5rem'>
+                        <Button h='1.75rem' variant='text' colorScheme='brand' size='sm' onClick={()=>setShowConfirm(!showConfirm)}>
+                          {showConfirm ? 'Hide' : 'Show'} 
+                        </Button>
+                      </InputRightElement>
+                    </InputGroup>
+                    {form.touched.confirmPassword && props.values.password !== props.values.confirmPassword ? <FormErrorMessage >Password and confirm password fields have to be the same</FormErrorMessage>:null}
+                   </FormControl> 
+                )} 
+              </Field>
+              <Button
+                mt={4}
+                isDisabled={props.values.password !== props.values.confirmPassword}
+                isLoading={isSubmitting}
+                w={'100%'}
+                colorScheme='brand'
+                size='lg'
+                type="submit"
+              >
+                Sign Up
+              </Button>
+            </Form>
+          )}
+            </Formik>
+    
+          </Box>
+
+
+         <Flex w={'100%'} justifyContent='space-between'>
+            <Flex mx='4' my='4'>
+              <Text color='text.200' mr='1'>Already have an account? </Text>
+              <Button variant={'link'} onClick={()=>router.push('/login')}>
+                 Login
+              </Button>
+            </Flex> 
+         </Flex>
+
+        </Box>
+  )
   return (
     <>
       <Head>
@@ -117,55 +288,9 @@ const Register = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col bg-black lg:w-1/2 text-center lg:text-left items-center justify-center md:justify-start lg:justify-center flex-grow">
-          <h1 className="text-3xl font-figtree text-white font-semibold lg:mt-0 mb-8 md:mt-24 mt-8">
-            Sign Up
-          </h1>
-          <form
-            onSubmit={handleSignUp}
-            className="flex flex-col justify-center lg:w-[400px] md:w-[400px] w-[95%]"
-          >
-            <input
-              className="form-input rounded-sm shadow-sm mb-4 pl-2 h-12 bg-transparent border-2 text-[#6E6E6F] font-figtree border-[#2A2B2A]"
-              type="email"
-              id="email"
-              placeholder="Email"
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-            />
-            <input
-              className="form-input rounded-sm shadow-sm mb-4 w-full pl-2 h-12 bg-transparent border-2 text-[#6E6E6F] font-figtree border-[#2A2B2A]"
-              type="password"
-              id="password"
-              placeholder="Password"
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-            />
-            <input
-              className="form-input rounded-sm shadow-sm w-full pl-2 h-12 bg-transparent border-2 text-[#6E6E6F] font-figtree border-[#2A2B2A]"
-              type="password"
-              id="confirm_password"
-              placeholder="Confirm Password"
-              value={retypedPassword}
-              onChange={(e) => setRetypedPassword(e.target.value)}
-            />
-            <button
-              className="btn btn-primary mt-8 bg-[#AB4DF7] font-figtree font-semibold w-full h-10 rounded-3xl"
-              type="submit"
-            >
-              Sign Up
-            </button>
-            <div className="flex mt-2 justify-center mb-16">
-              <p className="font-figtree text-white">
-                Already have an account?
-              </p>
-
-              <p className="text-[#AB4DF7] font-figtree ml-1.5">
-                <Link href="/login">Login</Link>
-              </p>
-            </div>
-          </form>
-        </div>
+        <Flex w={['100%','100%', '100%', '50%']} px='1rem' bg={'#121212'} h='100%' justifyContent='center' align={'center'} direction='column'>
+        {showSuccessAlert?successAlert: signUpForm}
+        </Flex>
       </div>
     </>
   );
