@@ -113,4 +113,19 @@ jobs:
             sudo podman rm auth
             sudo podman run --name="auth" -p 9080:3000 -d ghcr.io/weareflexable/auth:staging
 
-    
+      - name: Deploy on Prod server 
+        if: github.ref == 'refs/heads/prod'
+        uses: appleboy/ssh-action@v0.1.7
+        with:         
+          host: ${{ secrets.PROD_REMOTE_SERVER_ADDRESS }}
+          username: ${{ secrets.PROD_SERVER_USERNAME }}
+          key:  ${{ secrets.PROD_REMOTE_SERVER_KEY }}
+          port: ${{ secrets.PROD_SSH_PORT }}
+          script: |
+            pwd
+            cd ~
+            echo ${{ secrets.GHCR_TOKEN }} | podman login ghcr.io -u secrets.GHCR_USERNAME --password-stdin
+            sudo podman pull ghcr.io/weareflexable/auth:prod
+            sudo podman stop auth
+            sudo podman rm auth
+            sudo podman run --name="auth" -p 9081:3000 -d ghcr.io/weareflexable/auth:prod
