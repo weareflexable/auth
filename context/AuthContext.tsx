@@ -68,6 +68,8 @@ const AuthContextProvider = ({children}:AuthContextProviderProps)=>{
               return
             }
 
+            // check if 
+
             getPaseto(session).then(res=>{
               setPlatformPaseto(res)
               setPaseto(res)
