@@ -67,7 +67,7 @@ const AuthContextProvider = ({children}:AuthContextProviderProps)=>{
               clearTimeout(pushingTimeout)
               return
             }
-            console.log(session) 
+
             getPaseto(session).then(res=>{
               setPlatformPaseto(res)
               setPaseto(res)
