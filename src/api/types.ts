@@ -10,7 +10,8 @@ export interface PostAuthPayload {
 }
 
 export interface PostAuthRequest {
-    token: string
+    idToken:string,
+    accessToken: string
     deviceType: string
     provider: string
 }

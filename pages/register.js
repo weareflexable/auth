@@ -54,6 +54,8 @@ const Register = () => {
 
     let {email, password} = values
 
+    
+
     handleReCaptchaVerify()
 
     setIsSubmitting(true)
