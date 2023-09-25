@@ -67,11 +67,11 @@ const AuthContextProvider = ({children}:AuthContextProviderProps)=>{
               clearTimeout(pushingTimeout)
               return
             }
-            
-            getPaseto(session.access_token).then(res=>{
+            console.log(session) 
+            getPaseto(session).then(res=>{
               setPlatformPaseto(res)
               setPaseto(res)
-              pushingTimeout = setTimeout(()=>{
+              pushingTimeout = setTimeout(()=>{ 
                 console.log('signedIn')
                eventRef.current === 'recovery'? null:router.push('/dashboard')  
              },3000)

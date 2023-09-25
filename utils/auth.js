@@ -29,7 +29,6 @@ export const signInWithProvider = async (provider) => {
       );
       return { session, error };
 
- 
 };
 
 // todo: sign up
