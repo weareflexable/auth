@@ -42,7 +42,7 @@ export default function Redirect() {
     return (
         <div className="text-white flex flex-col items-center text-center">
             <h1 className="text-5xl font-bold font-figtree">Redirecting...</h1>
-            <span className="mt-4 w-[50%]">You&nbsp;re being redirected to another page. It may take a while so sit tight and stay flexable!</span>
+            <span className="mt-4 w-[50%]">You&nbsp;re being redirected to another page. It may take a minute so sit tight and stay Flexable</span>
         </div>
     )
 }
