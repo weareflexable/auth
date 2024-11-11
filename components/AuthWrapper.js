@@ -13,7 +13,7 @@ console.log(user)
       //   const user = await supabase.auth.user();
       //   // const user = localStorage.getItem("supabase.auth.token");
       //   if (!user) {
-      //     router.push("/login");
+      //     router.push("/login"); 
       //   } else {
       //     setUser(user);
       //   }

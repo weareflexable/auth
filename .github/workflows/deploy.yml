@@ -9,13 +9,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Code Checkout
-        uses: actions/checkout@v3 # Checkout the code
+        uses: actions/checkout@v4 # Checkout the code
 
-      - uses: actions/setup-node@v2 # Install Node.js in the Runner, and allow us to run npm commands
+      - uses: actions/setup-node@v4 # Install Node.js in the Runner, and allow us to run npm commands
         with:
           node-version: "16"
 
-      - uses: actions/cache@v2 # Caches the node_modules folder across builds, and makes the Runner use the cache as long as package-lock.json doesn’t change.
+      - uses: actions/cache@v4 # Caches the node_modules folder across builds, and makes the Runner use the cache as long as package-lock.json doesn’t change.
         with:
           # Next.js stores its cache in the .next/cache directory. This will persist the cache across builds for faster application rebuilds.
           path: |
@@ -38,13 +38,13 @@ jobs:
           DEV_ENV_FILE: ${{secrets.DEV_ENV_FILE}}
           STAGING_ENV_FILE: ${{secrets.STAGING_ENV_FILE}}
           PROD_ENV_FILE: ${{secrets.PROD_ENV_FILE}}
-          
+
       - name: Print Dev Env
         if: ${{ github.ref_name == 'main' }}
         run: cat .env
 
       - name: Upload Next build # Upload the artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: build
           path: |
@@ -58,15 +58,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Download next build # Download the above uploaded artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: build
 
       - name: Login to GitHub Container Registry
-        uses: docker/login-action@v2
+        uses: docker/login-action@v4
         with:
           registry: ghcr.io
           username: ${{ secrets.GHCR_USERNAME }}
