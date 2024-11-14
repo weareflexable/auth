@@ -1,6 +1,8 @@
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import supabase from "../utils/supabaseClient"
+import utils from "../utils/envVars"
+import envUtils from "../utils/envVars"
 
 interface RedirectProps {
     paseto: string
@@ -16,9 +18,9 @@ export default function Redirect() {
         const checkoutStatus = localStorage.getItem('checkout');
         const paseto = localStorage.getItem('PLATFORM_PASETO')
 
-        const marketplaceReturnUrl = paymentStatus ? `${process.env.NEXT_PUBLIC_MARKETPLACE}?paseto=${paseto}&payment=pending` : checkoutStatus? `${process.env.NEXT_PUBLIC_MARKETPLACE}?paseto=${paseto}&checkout=pending`: `${process.env.NEXT_PUBLIC_MARKETPLACE}?paseto=${paseto}`
+        const marketplaceReturnUrl = paymentStatus ? `${envUtils.NEXT_PUBLIC_MARKETPLACE}?paseto=${paseto}&payment=pending` : checkoutStatus? `${utils.NEXT_PUBLIC_MARKETPLACE}?paseto=${paseto}&checkout=pending`: `${utils.NEXT_PUBLIC_MARKETPLACE}?paseto=${paseto}`
 
-        const redirectUrl = redirectTo === 'portal' ? `${process.env.NEXT_PUBLIC_PORTAL}?paseto=${paseto}` : marketplaceReturnUrl
+        const redirectUrl = redirectTo === 'portal' ? `${envUtils.NEXT_PUBLIC_PORTAL}?paseto=${paseto}` : marketplaceReturnUrl
         // const redirectUrl = redirectTo === 'portal'?`http://localhost:3000/login?paseto=${paseto}`: `http://localhost:3006/login?paseto=${paseto}&payment=pending`
         setTimeout(() => {
             router.replace(redirectUrl) 

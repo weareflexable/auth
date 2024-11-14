@@ -1,4 +1,5 @@
 import { removePlatformPaseto, setPlatformPaseto } from "../src/storage";
+import envUtils from "./envVars";
 import supabase from "./supabaseClient";
 
 // todo: signIn
@@ -25,7 +26,7 @@ export const signInWithProvider = async (provider) => {
         provider,
       },
       // only redirects to a page in thesame domain
-      { redirectTo: `${process.env.NEXT_PUBLIC_ORIGIN}/dashboard` } // no way to pass the paceto using this option
+      { redirectTo: `${envUtils.NEXT_PUBLIC_ORIGIN}/dashboard` } // no way to pass the paceto using this option
       );
       return { session, error };
 
@@ -38,7 +39,7 @@ export const signUp = async ({ email, password }) => {
       email,  
       password,
     },
-    { redirectTo: `${process.env.NEXT_PUBLIC_ORIGIN}/dashboard` }
+    { redirectTo: `${envUtils.NEXT_PUBLIC_ORIGIN}/dashboard` }
   );
   return { user, session, error };
 };
@@ -46,7 +47,7 @@ export const signUp = async ({ email, password }) => {
 // todo: create Recovery for the forgotten password
 export const createRecovery = async (email) => {
   const { data, error } = await supabase.auth.api.resetPasswordForEmail(email, {
-    redirectTo: `${process.env.NEXT_PUBLIC_ORIGIN}/update-password`,
+    redirectTo: `${envUtils.NEXT_PUBLIC_ORIGIN}/update-password`,
   });
   return { data, error };
 };

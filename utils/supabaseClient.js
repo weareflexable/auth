@@ -1,8 +1,9 @@
 import { createClient } from "@supabase/supabase-js";
+import envUtils from "./envVars";
 
 const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.NEXT_PUBLIC_SUPABASE_API_KEY
+  envUtils.NEXT_PUBLIC_SUPABASE_URL,
+  envUtils.NEXT_PUBLIC_SUPABASE_API_KEY
 );
 
 export default supabase;
