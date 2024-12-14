@@ -6,6 +6,7 @@ import theme from '../theme'
 import {
   GoogleReCaptchaProvider,
 } from 'react-google-recaptcha-v3';
+import envUtils from "../utils/envVars";
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -17,7 +18,7 @@ function MyApp({ Component, pageProps }) {
       </Head>
       <div className="h-[92vh]">
         <ChakraProvider theme={theme}>
-        <GoogleReCaptchaProvider reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}>
+        <GoogleReCaptchaProvider reCaptchaKey={envUtils.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}> 
           <AuthContextProvider>
             <Component {...pageProps} />
           </AuthContextProvider>
